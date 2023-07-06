@@ -1,0 +1,67 @@
+Supplier Send Email
+
+===============
+Class :
+
+public class Sendemail {
+    @invocablemethod(label='rajsendemail' description='send email')
+    public static void Sendemail(list<Id> localId){
+        //Documentation__c inv = [Select Id, name,Supplier_Mail__c From Documentation__c Where Id=:localId[0]];
+        Documentation__c inv = [Select Id, name,Contact_Person_Email__c From Documentation__c Where Id=:localId[0]];
+        system.debug('let me check'+inv);
+        PageReference pdf = Page.Documantationinvoice;// Replace PdfOfInvoice with your Page which render as PDF.
+        pdf.getParameters().put('id', localId[0]);
+        // Blob b = pdf.getContentAsPDF();
+        Blob b;
+        if (Test.IsRunningTest()){b=Blob.valueOf('UNIT.TEST');}else{b = pdf.getContentAsPDF();}
+        // Create Attachment Object to attach with Email
+        Messaging.EmailFileAttachment efa = new Messaging.EmailFileAttachment();
+        efa.setFileName(inv.Name+'.pdf');
+        efa.setBody(b);
+        // Define the email
+        Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+        // Sets the paramaters of the email
+        email.setSubject('PDF of Invoice - '+inv.Name);
+        email.setToAddresses( new List<String>{inv.Contact_Person_Email__c} );
+        //email.setbccAddresses( new List<String>{'admin@gmail.com'} );
+        email.sethtmlBody('Hi '+inv.Name+',<br/><br/> '
+                          +'Please find the attached Invoice.'
+                          +'<br/><br/>'+'Thanks,'+'<br/>'
+                          +UserInfo.getName()+'<br/>'
+                          +UserInfo.getOrganizationName());
+        email.setFileAttachments(new Messaging.EmailFileAttachment[] {efa});
+        
+        try{
+            Messaging.SendEmailResult [] result = Messaging.sendEmail(new Messaging.SingleEmailMessage[] {email});
+        }catch(System.Exception e){
+            
+        }
+    }
+}
+
+=================================
+Test Class
+-----------------
+@isTest
+public class TestSendEmail {
+    @isTest
+      public static void sendEmail(){
+          List<Id> sId = new List<Id>();
+          Order__c ord = new Order__c();
+        //    ord.Name = 'Test';
+        ord.Customer__c = ord.Id;
+        ord.Email__c = 'kosekalyani@gmail.com';
+        ord.Status__c = 'Draft';
+        ord.Country_Wise_Purchase_Confirmation__c ='India';
+     	ord.Payment_terms_for_Sales_invoice_Proform__c= '100% Advance';
+        ord.Payment_terms_for_Purchase_Order_to_Supp__c='against copy of B/L, 10 days before ETA destination';
+        insert ord;
+       Documentation__c ord1 = new Documentation__c();
+        ord1.Order__c = ord.id;
+        insert ord1;
+          sId.add(ord1.id);
+          Sendemail.Sendemail(sId);
+          
+      }
+
+}

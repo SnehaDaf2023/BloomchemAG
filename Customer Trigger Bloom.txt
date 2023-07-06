@@ -1,0 +1,64 @@
+Customer Trigger 
+==================
+Helper
+------------
+trigger CustomerIdTrigger on Account (before insert) {
+    CustomerIdClass.duplicateAccountId(Trigger.new);
+    /*
+CustomerIdClass.duplicateId(Trigger.new);
+*/
+}
+
+===========================
+HAndler
+----------------
+public class CustomerIdClass {
+     public static void duplicateAccountId(List <Account> accId){
+        SET<String> setId = new SET<String>();        
+        List<Account> accList = [SELECT Id, Customer_Id__c FROM Account ];
+        for(Account acc:accList){
+            if(acc.Customer_Id__c!= null && !string.isBlank(acc.Customer_Id__c)){
+                setId.add(acc.Customer_Id__c);
+            }           
+        }        
+        map<Id,Account> accList1 = new Map<id,Account>([SELECT Id, Customer_Id__c FROM Account WHERE  Customer_Id__c IN:setId]);
+        for(Account acts:accId){
+            
+            if(setId.contains(acts.Customer_Id__c)){
+                acts.Customer_Id__c.addError('This Account Id is already exist');
+            }
+        }
+    }
+} 
+    ======================================================
+Test Class
+-----------------
+@isTest
+public class TestCustomerIdClass {
+    @isTest
+    public static void testduplicateId(){
+        // Insert Account
+        List<Id> accId = new List<Id>();
+        Account a = new Account();
+       // a.Customer_Id__c != 'null';
+        a.Customer_Id__c = 'Test';
+        a.Name='Test';
+        Test.startTest();
+        insert a;
+     list<account>ac=[SELECT Customer_Id__c FROM Account WHERE Customer_Id__c =:a.Id];
+     CustomerIdClass.duplicateAccountId(ac);
+    }
+}
+============================================================
+    /*
+public static void duplicateId (List<Account>conlist){
+        List<String>strlist = new List<String>();
+        List<Account>cquery=[Select Id,Name,Customer_Id__c from Account ];
+        for(Account	 con: cquery){
+            strlist.add(con.Customer_Id__c);
+            }
+            for(Account	 coo :conlist ){
+                if(strlist.Contains(coo.Customer_Id__c)){
+                    coo.Customer_Id__c.adderror('duplicate Id found');
+                        }}}}
+*/

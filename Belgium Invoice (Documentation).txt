@@ -1,0 +1,438 @@
+<apex:page standardController="Documentation__c" standardStylesheets="false" renderAs="pdf" 
+           applyBodyTag="false">     
+    <!-- <apex:image url = "{!Resource.BloomImage}" width= "150" height ="150" />   -->
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8"/>
+            <title>DotNetTec - Invoice html template bootstrap</title>
+            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css'/>
+            <!-- <link href="//db.onlinewebfonts.com/c/a78cfad3beb089a6ce86d4e280fa270b?family=Calibri" rel="stylesheet" type="text/css"/>  -->
+<link href='https://fonts.googleapis.com/css?family=Roboto | 400,500' rel='stylesheet' type='text/css' />
+
+        </head>
+        <script>
+     
+var a = sforce.apex.execute("Sendemail","Sendemail",{localId:"{!Documentation__c.Id}"});
+        </script>
+        
+        <style type="text/css">
+            table{font-family: 'Roboto', sans-serif; }
+            table td{   border:1px solid #000; font-size: 12px; outline: none; }
+            table th{  border:1px solid #000;  font-size: 12px; }
+            
+            .blue-bg{ background: #305496; }
+            .secondary{ background: #D9E1F2; }
+            .primaryBg{ background: #B4C6E7; }
+            .border-none{ border:none !important; }
+            .bl-none{border-left:none !important; }
+            .br-none{border-right:none !important; }
+            .bt-none{border-top:none !important; }
+            .bb-none{border-bottom:none !important; }
+            .bx-none{ border-top: 0px !important; border-bottom: 0px !important; }
+            .by-none{ border-left: 0px !important; border-right: 0px !important; }
+            
+            .bottom-border{border-bottom:1px solid #000!important; }
+            .border-left{border-left:1px solid #000!important; }
+            .border-right{border-right:1px solid #000!important; }
+            .border-top{border-top:1px solid #000!important; }
+            
+            
+            .px-none{ padding-top: 0px; padding-bottom: 0px; }
+            .py-none{ padding-left: 0px; padding-right: 0px; }
+            .pt-none{ padding-top: 0px; }
+            .pb-none{ padding-bottom: 0px; }
+            .pl-none{ padding-left: 0px; }
+            .pr-none{ padding-right: 0px; }
+            .pd-none { padding: 0px; }
+            
+            .text-center{ text-align: center; }
+        </style>
+        
+        <body>
+            
+            
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style=" font-family: 'Roboto', sans-serif; max-width:1000px; margin: 0 auto;border:none;   " class="border-none">
+                
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="border:none;">
+                            
+                            <table width="100%" border="0px" cellspacing="0" cellpadding="0" class="border-none" style="border:none;">
+                                <tbody>
+                                    <tr>
+                                        <td class="border-none" style="padding:0px 8px; border:none;">
+                                            <div class="header">
+                                              <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>
+                                                  
+                                            </div>
+                                            <!--<img src="https://bloomchemagpvtltd--sandboxorg.sandbox.file.force.com/file-asset/bloomchemaglogo?v=1&amp" style="max-width: 100px;"style="height: 40px;"/> -->
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+<td colspan="2" class="border-none" style="height: 15px;">&nbsp;</td>
+</tr>-->
+                                    <tr>
+                                        <td colspan="2" class="border-none" style=" border:none; font-weight: bold;padding:4px 8px; text-align: center;  font-size: 12px;">PURCHASE ORDER</td>
+                                    </tr>
+                                    <!-- <tr>
+<td colspan="2" class="border-none" style="height: 10px;">&nbsp;</td>
+</tr>-->
+                                    
+                                    <tr>
+                                        <td class="pd-none" style="border: none;">
+                                            <table width="100%" border="0px" cellspacing="0" cellpadding="0" align="top">
+                                                <tbody>
+                                                    
+                                                    
+                                                    <tr>
+                                                        <td class="border-none pd-none" valign="top" style="border:none;" >
+                                                            <table width="100%" border="0px" cellspacing="0" cellpadding="0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td valign="top" class="border-none bottom-border"  style="padding:0px 8px;line-height: 18px; border:1px solid #000; border-right: none; border-bottom: none;">
+                                                                            <p style=" border:0px; font-size: 12px; margin-bottom: 0px;">
+                                                                                Verkoper / Seller </p>
+                                                                            
+                                                                            <strong style="font-size: 12px;">
+                                                                              
+                                                                              Bill to Address:<br/>{!Documentation__c.Order__r.Verkoper_Seller_Address__c}<br/>{!Documentation__c.Order__r.Country__c} 
+                                                                            </strong> 
+                                                                            
+                                                                        </td>
+                                                                        
+                                                                        <td class="border-none border-left pd-none " style="border:1px solid #000; border-bottom: none;">
+                                                                            
+                                                                            <table width="100%" border="0px" cellspacing="0" cellpadding="0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td class="border-none" style="padding:0px 8px;font-size: 12px; border:none;">Bloomchemag Po No: </td>
+                                                                                        <td class="border-none" style="padding:0px 8px;font-size: 12px; border:none;">{!Documentation__c.Order__r.Bloomchemag_PO_Number__c}</td> 
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                         <td class="border-none" style="padding:0px 8px;font-size: 12px; border:none;">Po Date: </td>
+                                                                                          <td style="padding:0px 8px;font-size: 12px; border:none;"><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Documentation__c.Order__r.Our_PO_date__c}"/> </apex:outputText></td>   
+                                                                                       <!--- <td class="border-none" style="padding:0px 8px;font-size: 12px; border:none;">Datum / Date: </td>
+                                                                                        <td style="padding:0px 8px;font-size: 12px; border:none;"><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!NOW()}"/> </apex:outputText></td>  -->         
+                                                                                    </tr>
+                                                                                  <!---  <tr>
+                                                                                        <td class="border-none" style="padding: 8px;font-size: 12px; border:none;">Product Code </td>
+                                                                                        <td class="border-none" style="padding: 8px;font-size: 12px; border:none;">{!Documentation__c.Order__r.Product_Code__c}</td> 
+                                                                                    </tr>-->
+                                                                                    <tr>
+                                                                                        <td class="border-none" style="padding:4px 8px;font-size: 12px;border:none;">Our VAT N°: </td>
+                                                                                        <td class="border-none" style="padding:4px 8px;font-size: 12px; border:none;">BE0544589474</td>
+                                                                                    </tr>
+                                                                                    
+                                                                                </tbody>
+                                                                            </table>
+                                                                            
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="border-none bottom-border" valign="center"  style="border:none;  padding:0px 8px; line-height: 15px; border-top:1px solid #000; border-left:1px solid #000; ">
+                                                                            
+                                                                            <p style="font-weight: bold;font-size: 12px; border:0px;   margin: 0px;">We hereby confirm our purchase from you with the following details:</p>
+                                                                        </td>
+                                                                        
+                                                                        <td class="br-none " colspan="2" style="border:1px solid #000; border-bottom:none;  padding:3px 8px;font-weight: light;  font-size: 12px;margin-bottom: 0px;">Attention:<br/>Supplier Name :{!Documentation__c.Order__r.Supplier_Names__c}<br/> Email : {!Documentation__c.Order__r.Email_Supplier__c}</td>
+                                                                      <!---  <td class="br-none " colspan="2" style="border:1px solid #000; border-bottom:none;  padding:4px 8px;font-weight: bold;  font-size: 12px;margin-bottom: 0px;">Attention:<br/>Supplier Name &nbsp; do@gmail.com</td>-->
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="border-none pd-none" style="border:none;border-left:1px solid #000;border-top:1px solid #000; padding: 0; height: 65px; line-height: 20px;">
+                                                                            
+                                                                            <table width="100%" border="0px" cellspacing="0" cellpadding="0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td class="border-none  " style="border:none;font-size: 12px;padding:18px 8px;width: 40%; width: 100px;">
+                                                                                            Port of Loading: 
+                                                                                         <strong> {!Documentation__c.Order__r.Port_of_Loading_POL__c} </strong> 
+                                                                                            <!--   <strong> Achalpur </strong>-->
+                                                                                        </td>
+                                                                                        <td class="bx-none br-none" width="150px" style="border:none;font-size: 12px; border-left:1px solid #000; padding:18px 8px; height: 115px; padding:18px 8px; width: 130px;">
+                                                                                            Terms of Delivery: <br/>  <strong> {!Documentation__c.Order__r.Incoterms__c} 
+                                                                                           <!--  Terms of Delivery: <strong> Some terms in the Documentation  -->
+                                                                                            </strong>&nbsp;{!Documentation__c.Order__r.Incoterm_Description__c} 
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                        
+                                                                        <td class="border-none pd-none" style=" border: 1px solid #000;  height: 65px;border-bottom: none; line-height: 20px;font-size: 12px;padding:0 8px;">
+                                                                            
+                                                                            <table width="100%" border="0px" cellspacing="0" cellpadding="0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td style="border:none;font-size: 12px; border-right:1px solid #000;padding:18px 8px;height: 115px;width: 100px;">Loading Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Documentation__c.Order__r.Loading_Date__c}"></apex:param> </apex:outputText> </td>  
+                                                                                        <!--<td class="border-none border-left" style="width: 40%">
+                                                                                            Loading Date:  
+                                                                            <strong>{!Documentation__c.Order__r.Loading_Date__c}</strong>
+                                                                                                        </td>-->
+                                                                                        <td class="border-none border-left" style="font-size: 12px;padding:18px 8px;border:none;  ">
+                                                                                           Payment Terms:  <strong>{!Documentation__c.Order__r.Payment_terms_for_Purchase_Order__c} </strong>  
+
+
+                                                                                            
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            
+                                                                            
+                                                                        </td>
+                                                                        
+                                                                        
+                                                                    </tr>
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                </thead>
+                                                            </table>
+                                                        </td>
+                                                        
+                                                        
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="pd-none" style="border:1px solid #000; border-top: 2px solid #000;" >
+                                            <table width="100%" border="0px" cellspacing="0" cellpadding="0">
+                                                <thead>
+                                                    
+                                                    <tr>
+                                                     <th class="bt-none bl-none text-center" colspan="2" style="padding:4px 8px;border: none; border-bottom: 2px solid #000;border-right: 1px solid #000; font-size: 12px; font-weight: normal; text-align:center;  " >Product Description</th>
+                                                        <th  class="bt-none text-center" style="padding:4px 15px 4px 5px;font-weight: normal; border: none; border-bottom: 2px solid #000; border-right: 1px solid #000;font-size: 12px; text-align:center;  " > Hoeveelheid/ Quantity </th>
+                                                        <th class="bt-none text-center" style="padding:4px 8px 4px 5px; border: none;   border-bottom: 2px solid #000;border-right: 1px solid #000;   font-size: 12px; font-weight: normal; text-align:center; ">Unit</th>
+                                                        <th class="bt-none text-center" style="padding:4px 8px;border: none;  border-bottom: 2px solid #000;font-weight: normal;font-size: 12px;border-right: 1px solid #000; text-align:center; ">Eenheidsprijs/ Unit Price <br/> {!Documentation__c.Order__r.Currency_Invoice__c}  </th>
+                                                        <th class="bt-none text-center br-none" style="padding:4px 8px;border: none; border-bottom: 2px solid #000; font-weight: normal;font-size: 12px; text-align:center; ">Totaal bedrag/ Total Amount <br/> {!Documentation__c.Order__r.Currency_Invoice__c} </th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <apex:variable value="{!1}" var="count" />
+                                                <tbody>
+                                                    <apex:repeat var="b" value="{!Documentation__c.Order_Products__r}">
+                                                        
+                                                        
+                                                        <tr>
+                                                            
+                                                            <td class="bx-none bl-none" colspan="2"  style="font-weight: bold; font-size: 12px;border: none;border-right:1px solid #000; padding:4px 8px;">Product Name :<apex:Outputtext value="{!b.Products__r.name}"/><br/>CAS NO: <apex:Outputtext value="{!b.Products__r.CAS_NO__c}"/> <br/>HS Code: <apex:Outputtext value="{!b.Products__r.HS_Code__c}"/> <br/><apex:Outputtext value="{!b.Products__r.Product_Description__c}"/><br/>INCOTERMS 2010 to apply </td>
+                                                      
+
+                                                            <td class="bx-none" style="font-weight: normal; padding:4px 8px;font-size: 12px; border: none; border-right:1px solid #001; "><apex:Outputtext value="{!b.Quantity__c}"/> </td>
+
+                                                            <td class="bx-none" style=" padding:4px 8px;border: 0px solid #000;font-size: 12px; border-right:1px solid #000; "> <apex:Outputtext value="{!b.Unit__c}"/> </td>
+
+                                                            <td class="bx-none" style="padding:4px 8px; border:none;  border-bottom: none;font-size: 12px; border-top: none; border-right:1px solid #000;"> <apex:Outputtext value="{!b.Price__c}"  /> </td>
+
+                                                            <td class="bx-none br-none" style="padding:4px 8px;  border: none; font-size: 12px; "><apex:Outputtext value="{!b.Total_Supplier_Price__c}" /> </td>
+                                                        </tr>
+                                                        
+                                                    </apex:repeat>
+                                                    
+                                                      <!-- <tr>
+                                                            
+                                               <td class="bx-none bl-none" colspan="2"  style="font-weight: bold; font-size: 12px;border: none;border-right:1px solid #000; padding:4px 8px;">Product Name : <br/>CAS NO:  <br/>INCOTERMS 2010 to apply </td>
+                                                      
+
+                                                            <td class="bx-none" style="font-weight: normal; padding:4px 8px;font-size: 12px; border: none; border-right:1px solid #001; ">INCOTERMS </td>
+
+                                                            <td class="bx-none" style=" padding:4px 8px;border: 0px solid #000;font-size: 12px; border-right:1px solid #000; ">INCOTERMS</td>
+
+                                                            <td class="bx-none" style="padding:4px 8px; border:none;  border-bottom: none;font-size: 12px; border-top: none; border-right:1px solid #000;">INCOTERMS</td>
+
+                                                            <td class="bx-none br-none" style="padding:4px 8px;  border: none; font-size: 12px; "> INCOTERMS</td>
+                                                        </tr> -->
+
+                                                        
+                                                    
+                                                    <!-- </apex:repeat>-->
+                                                        <!--       
+                                                        <td valign="top" class="bx-none" style="font-weight: bold;">92.00</td>
+                                                        <td valign="top" class="bx-none">MT</td>
+                                                        <td valign="top" class="bx-none" style="font-weight: bold;">1750</td>
+                                                        <td valign="top" class="bx-none br-none" style="font-weight: bold; text-align: right;">161000</td>
+                                                        </tr> -->
+                                                    
+                                                    <tr>
+                                                        <td class="bb-none bl-none" colspan="2"  style="padding:4px 8px 10px 8px;border: none;  border-right: 1px solid #000; font-size: 12px;" ><strong>Documentation</strong> {!Documentation__c.Order__r.Documentation__c}<br/>
+                                                            <!---Sales Invoice, Certificate of Analysis, --> <br/>
+                                                            <strong>Special Conditions:</strong><br/>
+                                                            {!Documentation__c.Order__r.Special_Conditions__c}
+                                                            <!---Quality as per previous approved specification -->
+                                                        </td>
+                                                        <td class="bx-none" style="padding:4px 8px; border: none; border-right: 1px solid #000;font-size: 12px;" > &nbsp; </td>
+                                                        <td class="bx-none" style="padding:4px 8px; border: none; border-right: 1px solid #000;font-size: 12px; " > &nbsp;</td>
+                                                        <td class="bx-none" style="padding:4px 8px; border: none; border-right: 1px solid #000;font-size: 12px;" >  &nbsp;</td>
+                                                        <td class="bx-none " style="font-size: 12px;font-weight: bold;padding:4px 8px;  text-align: right; border: none;     ">&nbsp; </td>
+                                                    </tr>
+                                                 
+
+                                                    <tr>
+                                                        <td class="border-none border-right" rowspan="3" style=" font-size: 12px;border: none; padding:4px 8px;  border-right: 1px solid #000; ">Quality as per previous approved specification</td>
+                                                        <td class="bb-none by-none"   style="font-size: 12px; border: none; border: 1px solid #000; padding:4px 8px;" >Total/Total excl. BTW/VAT </td>
+                                                        <td class="bb-none by-none" style="font-size: 12px;border: none;border-top: 1px solid #000;padding:4px 8px;">&nbsp; </td>
+                                                        <td class="bb-none by-none" style="font-size: 12px;border: none;border-top: 1px solid #000; border-right: 1px solid #000;padding:4px 8px;">&nbsp; </td>
+                                                        <!--<td class="bb-none by-none">&nbsp;</td>-->
+                                                        <td class="" style="font-size: 12px;border: 1px solid #000;padding:4px 8px;border-left: none;  font-weight: bold;">{!Documentation__c.Order__r.Currency_Invoice__c}</td>
+                                                       <td class="bb-none br-none" style="font-size: 12px;padding:4px 8px;border: 1px solid #000; border-right: none; border-left: none;  font-weight: bold;">{!Documentation__c.Order__r.Total_Price__c} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td class="border-none border-right" >&nbsp;</td> -->
+                                                        <td class="border-none" style="font-size: 12px;padding:4px 8px;border:none;  " >BTW/VAT  </td>
+                                                        <td class="bx-none by-none"  style="font-size: 12px;border:none; padding:4px 8px;">{!Documentation__c.Order__r.Rate__c}% </td>
+                                                        <td class="border-none" style="font-size: 12px;border:none;  border-right: 1px solid #000;padding:4px 8px;" >&nbsp;</td>
+                                                        <!-- <td class="bx-none by-none">&nbsp;</td>-->
+                                                        <td class=""  style="font-size: 12px;padding:4px 8px; border:none;border-right: 1px solid #000; font-weight: bold;">{!Documentation__c.Order__r.Currency_Invoice__c} </td>
+                                                        <td class=" br-none" style="font-size: 12px;padding:4px 8px;border: none;font-weight: bold; " >{!Documentation__c.Order__r.BTW_VAT_GST__c}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td class="border-none border-right" >&nbsp;</td> -->
+                                                        <td class="border-none" style="font-size: 12px;padding:4px 8px;border:none;border-top: none;  " >Totaal/Total Incl. BTW/VAT </td>
+                                                        <td class="border-none" style="font-size: 12px;border:none; padding:4px 8px;" >&nbsp;</td>
+                                                        <td class="border-none" style="font-size: 12px;border:none;border-right: 1px solid #000; padding:4px 8px;" >&nbsp;</td>
+                                                        <!-- <td class="bx-none by-none">&nbsp;</td>-->
+                                                        <td style="border:none;border-top: 1px solid #000; border-right: 1px solid #000;padding:4px 8px;font-weight: bold; font-size: 12px;" >{!Documentation__c.Order__r.Currency_Invoice__c}</td>
+                                                        <td class="br-none" style="border:none;border-top: 1px solid #000; border-bottom: 0px solid #000;padding:4px 8px;font-weight: bold; font-size: 12px;" >{!Documentation__c.Order__r.Totaal_Total_Incl_BTW_VAT_GST__c}</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="bl-none bb-none" style="padding:0px 8px; border:none; border-top: 1px solid #000;font-size: 12px; border-right: 1px solid #000;">
+                                                            <strong style="font-size: 12px;">BLOOMCHEMAG BVBA</strong><br/>
+                                                            Sint-Antoniusstraat 16 b1 <br/>
+                                                            B-2400, Mol, Belgium<br/>BTW BE 0544.589.474
+                                                        </td>
+                                                        <td colspan="5" class="pd-none border-none border-top" style=" border:none; border-top: 1px solid #000;font-size: 12px;  ">
+                                                            
+                                                            <table width="100%" border="0px" cellspacing="0" cellpadding="0" >
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="border-none" style="padding:4px 8px; border:none;font-size: 12px;">
+                                                                            <div class="header">
+                                                                                <img src="{!$Resource.BloomSign}"   style=" height: 60px;" /> <br/>
+                                                                            </div>
+                                                                            
+                                                                        </td>
+                                                                        <!-- <td class="border-none">
+                                                                                <img style=" width: 150px;" src=" "/> 
+
+                                                                                </td>
+                                                                                <td class="border-none">
+                                                                                <img style=" width: 150px;" src=""/>
+                                                                                Rajesh Sethi
+                                                                                </td>-->
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                    
+                                                    <!--   <tr>
+                                                                <td colspan="5" class="border-none"> Amount Chargeable (in words) <br> 
+                                                                <span style="font-size: 20px; font-weight: bold;">Indian Rupees Six Lakh Twenty Seven Thousand Ninety Five Only</span>
+                                                                </td>
+                                                                <td class="border-none" colspan="2" align="right" valign="top">E. & O.E</td>
+                                                            </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </td>
+                    </tr>
+                    
+              <!--      <table width="100%" border="0px" cellspacing="0" cellpadding="0" style=" border:none; width: 100%; font-family: 'Roboto', sans-serif; font-size: 12px;">
+                <tbody>
+                    <br/>
+                    <br/>
+                     <br/>
+                    <br/>
+                    <td class="border-none " style=" border:none; padding-bottom: 8px;">
+                        <p style="font-weight: bold; border:0px; font-size: 18px; margin-bottom: 0px;"> Shipping/BL Instructions </p>
+                    </td>                   
+                    
+                    
+                    <tr >
+                        <td class="border-none" style=" border:none; padding-bottom: 8px; font-family: 'Roboto', sans-serif; font-size: 12px;"> Consignee: 
+                            <span style="font-family: 'Roboto', sans-serif; font-size: 12px;" >  {!Documentation__c.Order__r.Supplier_Consignee__c} </span>&nbsp; 
+                        </td> 
+                    </tr>
+                    
+                    <tr>
+                        <td class="border-none" style=" border:none; padding-bottom: 8px;  font-family: 'Roboto', sans-serif; font-size: 12px;"> Notify Party :
+                            <span style="font-family: 'Roboto', sans-serif; font-size: 12px;" >  {!Documentation__c.Order__r.Notify_Party__c} </span>&nbsp;
+                        </td> 
+                    </tr>
+                    
+                    <tr>
+                        <td class="border-none" style=" border:none; padding-bottom: 8px;  font-family: 'Roboto', sans-serif; font-size: 12px;"> Shipper : 
+                            <span style="font-family: 'Roboto', sans-serif; font-size: 12px;">   {!Documentation__c.Order__r.Shipper__c} </span>&nbsp;
+                        </td> 
+                    </tr>
+                    
+                </tbody>
+                        
+            </table>-->
+                </tbody>
+               
+              </table>
+            
+			       <br/> <br/> <br/>
+                        
+            
+            <!--   Sneha Code -->
+            <table width="100%" border="0px" cellspacing="0" cellpadding="0" style=" border:none; width: 100%; font-family: 'Roboto', sans-serif; font-size: 12px; ">
+                <tbody>
+                    <td class="border-none " style=" border:none; padding-bottom: 8px;">
+                        <p style="font-weight: bold; border:0px; font-size: 18px; margin-bottom: 0px;"> Shipping/BL Instructions </p>
+                    </td>                   
+                    <br/>
+                    
+                    <tr >
+                        <td class="border-none" style=" border:none; padding-bottom: 8px; font-family: 'Roboto', sans-serif; font-size: 12px;"> Consignee: 
+                            <span style="font-family: 'Roboto', sans-serif; font-size: 12px;" >  {!Documentation__c.Order__r.Supplier_Consignee__c} </span>&nbsp; 
+                        </td> 
+                    </tr>
+                    
+                    <tr>
+                        <td class="border-none" style=" border:none; padding-bottom: 8px;  font-family: 'Roboto', sans-serif; font-size: 12px;"> Notify Party :
+                            <span style="font-family: 'Roboto', sans-serif; font-size: 12px;" >  {!Documentation__c.Order__r.Notify_Party__c} </span>&nbsp;
+                        </td> 
+                    </tr>
+                    
+                    <tr>
+                        <td class="border-none" style=" border:none; padding-bottom: 8px;  font-family: 'Roboto', sans-serif; font-size: 12px;"> Shipper : 
+                            <span style="font-family: 'Roboto', sans-serif; font-size: 12px;">   {!Documentation__c.Order__r.Shipper__c} </span>&nbsp;
+                        </td> 
+                    </tr>
+                    
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+        
+          <br/>  <br/>  <br/>  <br/>       <br/>  <br/>  <br/>  <br/>     <br/>  <br/>  <br/>  <br/>                     
+            
+            <div class="header">
+                <!-- sneha 17/11 
+                <img src="{!$Resource.bloom_Footer}" width="100%"/> 
+                -->
+                   <img src="{!$Resource.InvoiceAddressforIndiaBelgiumCommercial}" alt="footer logo" width="100%" height="100" /> 
+            </div>
+       
+        </body>
+      </html>
+ </apex:page>

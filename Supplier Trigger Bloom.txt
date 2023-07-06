@@ -1,0 +1,106 @@
+Supplier Trigger
+---------------------------
+Helper
+---------
+trigger supplier_vendor on Supplier__c (before insert, after insert) {
+     if(Trigger.isBefore && Trigger.isInsert){
+          HandlerSupplierUpdateAvoidDuplicasy.updateSupplier(trigger.new);
+     }
+    if(Trigger.isAfter && Trigger.isInsert){
+        HandlerSupplierUpdateAvoidDuplicasy.updateSupplier(trigger.new);
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+
+public class HandlerSupplierUpdateAvoidDuplicasy {
+    public static void updateSupplier(List<Supplier__c> supplr){
+        list<string> em=new list<string>();
+        set<id>sid=new set<id>();
+        for(Supplier__c co:supplr){
+            em.add(co.Vendor_Code__c);
+            sid.add(co.id);
+        }
+        map<id,Supplier__c>co1=new map<id,Supplier__c>([select id,Vendor_Code__c,Customer_Feedback_of_product__c,Notes__c,Mobile_No__c,Email__c from Supplier__c where Vendor_Code__c in:em]);
+        for(Supplier__c co:supplr) {
+            for(Supplier__c co2:co1.values()){
+                co2.Vendor_Code__c=co.Vendor_Code__c;
+                co2.Advance_Amount__c=co.Advance_Amount__c;
+                co2.Application__c=co.Application__c;
+                co2.Company_Name__c=co.Company_Name__c;
+                co2.Company_Website__c=co.Company_Website__c;
+                co2.Consignee__c=co.Consignee__c;
+                co2.Country__c=co.Country__c;
+                co2.Customer_Feedback_of_product__c=co.Customer_Feedback_of_product__c;
+                co2.Date__c=co.Date__c;
+                co2.From_Bloomchemag__c=co.From_Bloomchemag__c;
+                co2.Get_in_Touch_Reference__c=co.Get_in_Touch_Reference__c;
+                co2.Meeting_Person__c=co.Meeting_Person__c;
+                co2.Point_of_Dicussion_2__c=co.Point_of_Dicussion_2__c;
+                co2.Point_of_Dicussion_3__c=co.Point_of_Dicussion_3__c;
+                co2.Points_of_Discussion_1__c=co.Points_of_Discussion_1__c;
+                co2.Place__c=co.Place__c;
+                co2.Payment_Source_for_Suppliers__c=co.Payment_Source_for_Suppliers__c;
+                co2.OUS_Updated__c=co.OUS_Updated__c;
+                co2.Notify_Party__c=co.Notify_Party__c;
+                co2.Notes_Remarks__c=co.Notes_Remarks__c;
+                co2.Product__c=co.Product__c;
+                co2.Products_Description__c=co.Products_Description__c;
+                co2.Reach__c=co.Reach__c;
+                co2.Shipper__c=co.Shipper__c;
+                co2.Supplier_Contact_Person__c=co.Supplier_Contact_Person__c;
+                co2.Supplier_type__c=co.Supplier_type__c;
+                co2.Total_Amount__c=co.Total_Amount__c;
+                co2.Verkoper_Seller_Address__c=co.Verkoper_Seller_Address__c;
+                co2.Mobile_No__c=co.Mobile_No__c;
+                co2.Email__c=co.Email__c;
+                co2.Notes__c = co.Notes__c;
+                co2.Region__c = co.Region__c;
+                co2.Competitor_Acitivity__c = co.Competitor_Acitivity__c;
+                co2.From_Bloomchemag__c = co.From_Bloomchemag__c;
+                co2.Meeting_Person__c = co.Meeting_Person__c;
+                co2.Contact_Details__c = co.Contact_Details__c;
+                
+            }
+        }
+        update co1.values();
+        system.debug('hira'+co1.size());
+        if(co1.size()>1) {
+            list<Supplier__c>co=[select id from Supplier__c where id in:sid];
+            delete co;
+            
+        }
+    }
+}
+
+==============================================================
+Test class
+=============
+@isTest
+public class SupplierHandlerControllerTest {
+    @isTest
+    public static void testSupplier(){
+        List<Supplier__c> SupplierObjList = new List<Supplier__c>();
+        Supplier__c supp = new Supplier__c();
+        supp.Name = 'Test';
+        supp.Vendor_Code__c = 'Code 12'; 
+        supp.Email__c = 'kosekalyani@gmail.com';
+        insert supp;
+        SupplierObjList.add(supp);
+        HandlerSupplierUpdateAvoidDuplicasy.updateSupplier(SupplierObjList);
+    }
+    
+//HandlerUpdateCustomerRecord (Customer)
+
+     @isTest
+    public static void testCustomer(){
+        List<Account> custList = new List<Account>();
+        Account acc = new Account();
+        acc.Name = 'Test';
+        acc.Phone = '123456';
+        acc.Email__c = 'kosekalyani@gmail.com';
+        insert acc;
+        custList.add(acc);
+        HandlerUpdateCustomerRecord.updateCustomer(custList);
+    }
+    
+}

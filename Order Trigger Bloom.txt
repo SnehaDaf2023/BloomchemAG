@@ -1,0 +1,526 @@
+trigger PurchaseConfirmationN on Order__c ( before Insert,before update) {
+    
+    if(Trigger.isBefore && Trigger.isInsert){
+        HandlerClassPurchaseConfirmationN.orderNumber(trigger.new);
+        SelectDocumentationPicklist.selectPicklistDocumentation(Trigger.new);
+        SelectDocumentationPicklist.specialConditions(Trigger.new);
+        SelectDocumentationPicklist.bankDetailsForPayment(Trigger.new);
+        SelectDocumentationPicklist.CountrywiseAddress(Trigger.new);
+        
+    }
+    if(Trigger.isUpdate && Trigger.isBefore){
+        HandlerClassPurchaseConfirmationN.orderNumber(trigger.new);
+        SelectDocumentationPicklist.selectPicklistDocumentation(Trigger.new);
+        SelectDocumentationPicklist.specialConditions(Trigger.new);
+        SelectDocumentationPicklist.CountrywiseAddress(Trigger.new);
+         SelectDocumentationPicklist.bankDetailsForPayment(Trigger.new);
+
+        
+    }
+    
+    if(Trigger.isBefore && Trigger.isInsert){
+        HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(trigger.new);
+    }
+    if(Trigger.isUpdate && Trigger.isBefore){
+        HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(trigger.new);
+        
+    }
+    
+}
+
+---------////////////////////////////////////////////////////////////////////////////////////////////
+
+Class :
+
+=============
+public class HandlerClassPurchaseConfirmationN {
+    public static void orderNumber(List<Order__c> Ord){
+        Date d = Date.today();
+        integer year =  Date.Today().Year();
+        string s1=string.valueof(year).right(2);
+        //string s2='PO';
+        DateTime now = System.now();
+        System.debug( 'now ' + now.format( ' HHmm' ));
+        // string s2=string.valueof(now);
+        // Integer month =  Integer.valueOf(String.valueOf(Date.Today().Month()).length(2));
+        
+        
+        //DateTime dt = DateTime.newInstance(d.year(),d.month(), d.day());
+        //system.debug(d.format('MMMM'));  
+        List<Order__c>orderList = new List<Order__c>();
+        for(Order__c updateOrderNumber:Ord){
+            Order__c newOrder=new Order__c();
+          //  system.debug('----'+updateOrderNumber.Name);
+            system.debug('----'+updateOrderNumber.Name);
+            
+            //newOrder.ord_num__c =dt.format('MMMM')+'-'+d.Year()+'-'+updateOrderNumber.Order_No__c;
+            if(updateOrderNumber.Country_Wise_Purchase_Confirmation__c == 'India')
+            {
+                updateOrderNumber.Purchase_Confirmation_N__c =s1+''+'-PO-'+''+updateOrderNumber.Name+''+now.format( 'HHmm');
+                //  newOrder.id=updateOrderNumber.id;
+                orderList.add(newOrder);
+            }
+            else if(updateOrderNumber.Country_Wise_Purchase_Confirmation__c == 'Belgium')
+            {
+                //here can add Field Api Name whatever field Need to add and Api name is in Object Manager/
+               //  Bloomchemag_PO_Number__c  this is the api name Purchase_Confirmation_N__c // this use to comment 
+               
+                updateOrderNumber.Purchase_Confirmation_N__c =s1+''+'-PO-'+''+updateOrderNumber.Name+''+now.format( 'HHmm');
+                //  newOrder.id=updateOrderNumber.id;     changes done by kk  replace of Name 24,30 same changes 23-
+                orderList.add(newOrder);
+                
+            }
+            else 
+            {
+                updateOrderNumber.Factuur_nr_Invoice_N__c =s1+''+'-CL-'+''+updateOrderNumber.Name+''+now.format( 'HHmm');
+                //  newOrder.id=updateOrderNumber.id;
+                orderList.add(newOrder);
+                
+            }
+        }
+        
+        // update orderList;
+        
+    }  
+    
+    
+    //paymentTermPurchaseConformation
+    //
+    Public static void paymentTermPurchaseConformation(list<Order__c>opp){
+        for(Order__c objAcc : opp){
+            // Payment terms for Purchase Order to Supplier
+            if(objAcc.Payment_terms_Purchase_Order_to_Supplier__c == '100%Advance')
+            {
+                objAcc.Payment_terms_for_Purchase_Order__c ='100% Advance';
+            }
+            if(objAcc.Payment_terms_Purchase_Order_to_Supplier__c == '(%Value) Adv & (%Value) bal against B/L copy, (Number) days before ETA')
+            {
+                objAcc.Payment_terms_for_Purchase_Order__c =objAcc.Value_1__c +'  '+ '% Advance & ' +'  ' + objAcc.Value_2__c + ' '+ ' % balance against  B/L copy, '+''+ objAcc.Days__c + ' '+'days before ETA' ;
+                
+                
+            }
+            
+            if(objAcc.Payment_terms_Purchase_Order_to_Supplier__c == '(%Value) against B/L copy, 10 days before ETA')
+                
+            {
+                objAcc.Payment_terms_for_Purchase_Order__c =objAcc.Value_1__c +'  '+ ' % '+ 'against  B/L Copy , 10 days before ETA ' ;
+            }
+            
+            if(objAcc.Payment_terms_Purchase_Order_to_Supplier__c == '(Numbers) days from invoice date')
+            {
+                objAcc.Payment_terms_for_Purchase_Order__c =objAcc.Days__c +'  '+ 'days from invoice date' ;
+            }
+            if(objAcc.Payment_terms_Purchase_Order_to_Supplier__c == 'After (Number) days from date of Delivery')
+            {
+                objAcc.Payment_terms_for_Purchase_Order__c = 'After '+''+ objAcc.Days__c +''+ 'days from date of Delivery' ;
+            }
+            if(objAcc.Payment_terms_Purchase_Order_to_Supplier__c == '(%Value) Adv & bal (%Value) against B/L copy')
+            {
+                objAcc.Payment_terms_for_Purchase_Order__c =objAcc.Value_1__c +'  '+ '% Advance & bal ' +''+ objAcc.Value_2__c +''+ '%  against  B/L copy' ;
+            }
+            if(objAcc.Payment_terms_Purchase_Order_to_Supplier__c == '(%Value) Adv Payment and (%Value) bal after (Number) days from B/L date')
+            {
+                objAcc.Payment_terms_for_Purchase_Order__c =objAcc.Value_1__c +'  '+ '% Advance Payment and' +''+ objAcc.Value_2__c +''+ '% balance after' +''+  objAcc.Days__c +''+ 'days from B/L date' ;
+            }
+            
+            
+            // Payment terms for Sales invoice& Proforma Invoice for customer
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '100% Advance')
+            {
+                objAcc.Payment_Terms_with_Customer__c ='100% Advance';
+            }
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(Numbers) days after delivery')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Days__c +'  '+ 'days after delivery' ;
+            }
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(Numbers) days against copy of B/L')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Days__c +'  '+ 'days against copy of B/L' ;
+            }
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(Number) days from Invoice date')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Days__c +'  '+ 'days from Invoice date' ;
+            }
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(%Value) TT against copy of B/L')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Value_1__c +'  '+ 'TT against copy of B/L' ;
+            }
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(%Value) against copy of B/L')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Value_1__c +'  '+ 'against copy of B/L' ;
+            }
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(%Value) Advance &(%Value) Balance against B/L')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Value_1__c +'  '+ '% Advance &' +''+ objAcc.Value_2__c +''+ '% balance against B/L'; 
+            }
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(%Value) Advance & (%Value) Balance against delivery')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Value_1__c +'  '+ '% Advance &' +''+ objAcc.Value_2__c +''+ 'Balance against delivery'; 
+            }        
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == '(%Value) Advance, Balance (%Value) after (Number) days of Delivery')
+            {
+                objAcc.Payment_Terms_with_Customer__c =objAcc.Value_1__c +'  '+ '% Advance &' +''+ objAcc.Value_2__c +''+ '% Balance'+'' + objAcc.Days__c + ''+ 'days of Delivery'; 
+            }  
+            if(objAcc.Payment_terms_for_Sales_invoice_Proform__c == 'LC at Sight')
+            {
+                objAcc.Payment_Terms_with_Customer__c ='LC at Sight';
+            }
+        }
+    }
+}
+
+=================
+2nd classs
+----====
+
+public class SelectDocumentationPicklist {    // call purchase confirmation trigger
+    public static void selectPicklistDocumentation(List<Order__c> ordList){
+        for(Order__c ord : ordList){
+            if(ord.Select_Documentation__c == '1'){
+                ord.Documentation__c = 'Sales Invoice, Packing List, Certificate of Origin,Certificate of Analysis with Batch No. of the product loaded,Dangerous Goods Form';
+            }
+            
+            
+            else if(ord.Select_Documentation__c == '2'){
+                ord.Documentation__c = 'Amount Sales Invoice, Packing List, Certificate of Origin, Certificate of Analysis with Batch No. of the product loaded, BL and Tank Cleaning Certificate';
+            }
+            else if(ord.Select_Documentation__c == '3'){
+                ord.Documentation__c = 'Sales Invoice, Packing List, Certificate of Origin, Certificate of Analysis with Batch No. of the product loading photos of container (at least 4 photos)';
+                
+            }
+            else if(ord.Select_Documentation__c == '4'){
+                ord.Documentation__c ='Sales Invoice, Packing List, Certificate of Origin, Certificate of Analysis with Batch No. of the product loading photos of isotank (at least 4 photos)';
+            }
+            else if(ord.Select_Documentation__c == '5'){
+                ord.Documentation__c ='Sales Invoice, Packing List, Certificate of Origin (Only from Chamber of Commerce), Certificate of Analysis, please share photos of loading of container (at least 4 photos) of the product loaded';
+            }
+            else if(ord.Select_Documentation__c == '6'){
+                ord.Documentation__c ='Sales Invoice, Packing List, Certificate of Analysis, Certificate of Origin issued by the Chamber of Commerce, Bill of lading';
+            }
+        }
+    }
+    public static void specialConditions(list<Order__c> ordLisst){
+        for(Order__c ord : ordLisst ){
+            if(ord.Select_Special_Condition__c == '1'){
+                ord.Special_Conditions__c = '  1.  Neutral  Labels on The  Drums   Container  (Without Name  of The Producer  it  )  With the  Name of the  Product , UN No.    Haz Class LabelsForce   ' + '\n' + '  2.   Free days should be at least Twenty One  days from date of vessel arrival at destination and thereafter 30 USD/day/tank or Euro 25/day/tank. ' + '\n' + ' 3. Hoyer, Den Hartogh and Newport are preferred tank operators. (Do not use DJD International,Bertschi) ' + '\n' + ' 4. Do not use DJD International ' + '\n' + ' 5.  Tolerance in Qty (+/- 5%) allowed (22-24 MT will be accepted) ';
+                
+            }
+            
+            else if(ord.Select_Special_Condition__c == '2'){
+                ord.Special_Conditions__c = ' 1. Neutral Labels on Drums and Container (without  name of producer on it) with name of Product, UN No., Haz Class Labels ' ; 
+            }
+            if(ord.Select_Special_Condition__c == '3'){
+                ord.Special_Conditions__c = ' 1. Neutral Labels on DRUMS and Container (without name of producer on it)  with name of Product , UN No. , Haz Class Labels ' + '\n' + ' 2. Free days should be at least 14 days from date of vessel arrival at destination. ' + '\n' + '  3. Tank / Container rental USD 30 or EURO 30 or less is acceptable ' + '\n' + ' 4. Best quality material should be provided ';
+            }
+            if(ord.Select_Special_Condition__c == '4'){
+                ord.Special_Conditions__c = '1.Neutral Labels on IBC and Container (without name of producer on it). Label must have only name of Product,UN No., Haz Class . ' + '\n' + ' 2.  Product must be EU REACH registered  ' + '\n' + ' 3.  Free days should be at least 14 days from date of vessel arrival at destination then after Euro 30/day/container or Usd 30/day/container';
+            }
+            if(ord.Select_Special_Condition__c == '5'){
+                ord.Special_Conditions__c = '1.Neutral Labels on Drums and Container (without name of producer on it). Label must have only name of Product, UN No., Haz Class.' + '\n' + '  2.  Product must be EU REACH registered ' + '\n' + ' 3. Free days should be at least 21 days from date of vessel arrival at destination';
+            }
+            if(ord.Select_Special_Condition__c == '6'){
+                ord.Special_Conditions__c = '1. Minimum 21 Mt. to be loaded in each ISO tank ' + '\n' + '2.  Do not use tank owner DJD International/Manuport  ' + '\n' + '3. Free days should be at least 21 days from date of vessel arrival at destination and thereafter max. 30 Euro/tank/day OR USD 30/tank/day will be applicable';
+            }
+            if(ord.Select_Special_Condition__c == '7'){
+                ord.Special_Conditions__c = '1. Do not use tank owner DJD International /KLB tank /Manuport logistics ' + '\n' + ' 2. Free days should be at least 21 days from date of vessel arrival at destination and thereafter max. 30 Euro/tank/day or 30 USD/tank/day will be applicable ';
+                
+            }
+            if(ord.Select_Special_Condition__c == '8'){
+                ord.Special_Conditions__c = ' 1.Neutral Labels on IBCs and Container (without name of producer on it). Label must have only name of Product. ' + '\n' + '  2. Free days should be at least 14 days from date of vessel arrival at destination.' + '\n' + ' 3. Tank/ Container rental maximum USD 30 or EURO 25 per day or less is acceptable ' + '\n' + ' 4. Only Telex BL required with no extra cost ';
+                
+            }
+            if(ord.Select_Special_Condition__c == '9'){
+                ord.Special_Conditions__c = '1. Do not use tank owner DJD International/KLB tank/Manuport logistics   2. Tonnage cover under REACH Reg.  3. Free days should be at least 21 days from date of vessel arrival at destination and thereafter max. 30 Euro/tank/day or 30 USD/tank/day will be applicable '; 
+            }
+            if(ord.Select_Special_Condition__c == '10'){
+                ord.Special_Conditions__c = ' 1. Neutral Labels on IBCs and Container (without name of producer on it). Label must have only name of Product.' + '\n' + '   2. Preferred IBC-Container Mauser SM 15 or SCHUTZ ECOBULK MX 1000 accessible for electric Stucker trucks Payment ' + '\n' + '  3. Free days should be at least 14 days from date of vessel arrival at destination ' + '\n' + '  4 . Container rental maximum USD 30 or EURO 30 per day or less is acceptable ' + '\n' + ' 5.  Only Telex BL required  with no extra cost';
+            }
+            if(ord.Select_Special_Condition__c == '11'){
+                ord.Special_Conditions__c = ' 1. Tonnage cover under REACH Reg. ' + '\n' + '2 MSDS and Exposure Scenario or ESDS (extended safety data sheet) ' + '\n' + ' 3.  Free days should be at least 14 days from date of vessel arrival at destination thereafter 30 Euro/day/tanor 30 USD/day/tank ';
+                
+            }
+            
+        }
+        
+    }
+    public static void bankDetailsForPayment(list<Order__c> orddLisst){
+        for(Order__c ordd : orddLisst ){
+            if(ordd.Bank_Type__c == 'Eurofactor (EURO)'){                 //' + '\n' + '  ' + '
+                ordd.Bank_Details_for_payment__c = 'Bank Name : Deutsche Bank AG  Address : Avenue Marnix 13-15, 1000 Brussels  Account No. : 826-1000944-18   IBAN : BE50 82610009 4418   BIC : DEUTBEBE ';
+                
+            }
+            if(ordd.Bank_Type__c == 'Eurofactor (USD)'){
+                ordd.Bank_Details_for_payment__c = 'Bank Name : Deutsche Bank AG ' + '\n' + ' Address : Avenue Marnix 13-15, 1000 Brussels ' + '\n' + '  Account No. : 8261 2109 4413 ' + '\n' + '  IBAN BE08 8261 2109 4413 ' + '\n' + '  BIC : DEUTBEBE ';
+            }
+            if(ordd.Bank_Type__c == 'KBC Bank (Euro)'){
+                ordd.Bank_Details_for_payment__c = 'Bank name    : KBC bank Geel,  ' + '\n' + '  Address  : Markt 62, 2440 Geel  ' + '\n' + ' Account No. : 76 7310 36173695 ' + '\n' + ' IBAN  :BE76 7310 36173695 ' + '\n' + ' BIC    : KREDBEBB	 ';
+                
+            }
+            if(ordd.Bank_Type__c == 'KBC Bank (USD)'){
+                ordd.Bank_Details_for_payment__c = 'Bank name : KBC Bank GEEL  ' + '\n' + ' Address : Markt 62, 2440 GEEL, BELGIUM  ' + '\n' + '  Account No. :7310 3617 3695  ' + '\n' + ' IBAN : :BE76 7310 3617 3695, BIC :KREDBEBB  ' + '\n' + ' Pay Through: The Bank of New York Mellon (BIC Code: IRVT US 3N) ';
+                
+            }
+        }
+    }
+    public static void CountrywiseAddress(list<Order__c> orderList){
+        for(Order__c ordAddress : orderList ){
+            if(ordAddress.Address_India_Belgium__c == 'India'){                 //' + '\n' + '  ' + '
+                ordAddress.Address_Country_wise__c = 'Bloomchemag Private Limited ' + '\n' + '  Unit 104-105-108, Tower 1  ' + '\n' + 'Sector 135, Noida–201301 India ' + '\n' + 'GST No : 09AAFCB5025N1ZG';
+            }
+            if(ordAddress.Address_India_Belgium__c == 'Belgium'){                 //' + '\n' + '  ' + '
+                ordAddress.Address_Country_wise__c = 'Bloomchemag BV ' + '\n' + ' Sint - Antoniusstraat 16 b1, ' + '\n' + 'B-2400 Mol, Belgium ' + '\n' + 'BTW BE 0544.589.474';
+            }
+            
+        }
+    }   
+}
+
+==========================================================================
+Test Class
+-----------
+
+@isTest                                      //(seeAllData = FALSE)
+public class HandlerClassPurchaseConfirmationNTest {
+    @isTest
+    public static void purchaseConfirmationTest() {
+        List<Order__c> ordList = new List<Order__c>();
+        Order__c ord = new Order__c();
+        //    ord.Name = 'Test';
+        ord.Customer__c = ord.Id;
+        ord.Email__c = 'kosekalyani@gmail.com';
+        ord.Status__c = 'Draft';
+        ord.Country_Wise_Purchase_Confirmation__c ='India';
+        ord.Payment_terms_for_Sales_invoice_Proform__c= '100% Advance';
+        ord.Payment_terms_for_Purchase_Order_to_Supp__c='against copy of B/L, 10 days before ETA destination';
+        insert ord;
+        ordList.add(ord);
+        HandlerClassPurchaseConfirmationN.orderNumber(ordList);
+        ord.Country_Wise_Purchase_Confirmation__c ='Belgium';
+        ord.Payment_terms_for_Sales_invoice_Proform__c = '(%Value) against copy of B/L';
+        ord.Payment_terms_for_Purchase_Order_to_Supp__c = 'After (Number) days from date of Delivery';
+        update ord;
+        HandlerClassPurchaseConfirmationN.orderNumber(ordList);
+    }  
+
+    @isTest
+    public static void PaymentTermPurchaseOrdertoSupplier() {
+        List<Order__c> orderList = new List<Order__c>();
+        Order__c opp = new Order__c();
+        //    ord.Name = 'Test';
+        opp.Payment_Terms_with_Customer__c='Test';
+        opp.Status__c = 'Draft';
+        opp.Value_1__c= 10;
+        opp.Value_2__c= 20;
+        opp.Days__c =30;
+        // opp.BTW_VAT_GST__c = '100% Advance';
+        //opp.Bloomchemag_PO_Number__c = '86798';
+        opp.Payment_terms_for_Purchase_Order__c = '100% Advance';
+      //  opp.Payment_terms_for_Purchase_Order_to_Supp__c= '100% Advance';
+        opp.Payment_terms_for_Purchase_Order_to_Supp__c= 'Advance & balance against copy of B/L, days before ETA destination';
+        opp.Payment_terms_for_Sales_invoice_Proform__c= '100% Advance';
+       opp.Payment_terms_for_Purchase_Order_to_Supp__c= 'against copy of B/L, 10 days before ETA destination';
+        //opp.Payment_terms_for_Purchase_Order_to_Supp__c='Advance & balance against copy of B/L, days before ETA destination';
+        //opp.Payment_terms_for_Sales_invoice_Proform__c = '(Numbers) days against copy of B/L';
+        
+     opp.Payment_terms_Purchase_Order_to_Supplier__c = '100%Advance';
+            insert opp;
+        
+        orderList.add(opp);
+        HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(orderList);
+        //HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(orderList);
+        opp.Payment_terms_for_Sales_invoice_Proform__c= 'Numbers) days against copy of B/L';
+        opp.Payment_terms_for_Sales_invoice_Proform__c= '100% Advance';
+        opp.Payment_terms_for_Purchase_Order_to_Supp__c= 'Advance & balance against copy of B/L, days before ETA destination';
+        update opp;
+        HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(orderList);
+        // HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(orderList);
+        
+    } 
+     @isTest
+    public static void abc() {
+        
+         List<Order__c> orderList = new List<Order__c>();
+        Order__c opp = new Order__c();
+        //    ord.Name = 'Test';
+        opp.Payment_Terms_with_Customer__c='Test';
+        opp.Status__c = 'Draft';
+        opp.Value_1__c= 10;
+        opp.Value_2__c= 20;
+        opp.Days__c =30;
+        opp.Payment_terms_Purchase_Order_to_Supplier__c = '(%Value) against B/L copy, 10 days before ETA';
+         opp.Payment_terms_for_Sales_invoice_Proform__c = '(Numbers) days after delivery';
+            insert opp;
+        orderList.add(opp);
+        HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(orderList);
+        
+       /* opp.Payment_terms_for_Sales_invoice_Proform__c= 'Numbers) days against copy of B/L';
+        //opp.Payment_terms_for_Sales_invoice_Proform__c= '100% Advance';
+        opp.Payment_terms_Purchase_Order_to_Supplier__c = 'After (Number) days from date of Delivery';
+        update opp;
+       HandlerClassPurchaseConfirmationN.paymentTermPurchaseConformation(orderList);*/
+    }
+ @isTest
+    public static void selectDocument(){
+        List<Order__c> ordList = new List<Order__c>();
+        Order__c ord = new Order__c();
+     //  ord.Documentation__c ='Test';
+        ord.Status__c = 'Draft';
+        ord.Email__c = 'kosekalyani@gmail.com';
+       ord.Select_Special_Condition__c = '1';
+       // ord.Special_Conditions__c = '1. Neutral Labels on Drums and Container (without name of producer on it) with name of Product, UN No., Haz Class LabelsForce 2. Free days should be at least 21 days from date of vessel arrival at destination and thereafter 30 USD/day/tank or Euro 25/day/tank. 3. Hoyer, Den Hartogh and Newport are preferred tank operators. (Do n0t use DJD International,Bertschi) 4. Do not use DJD International 5. Tolerance in Qty (+/- 5%) allowed (22-24 MT will be accepted)';
+        ord.Select_Documentation__c = '2';
+        ord.Documentation__c = 'Amount Sales Invoice, Packing List, Certificate of Origin, Certificate of Analysis with Batch No. of the product loaded, BL and Tank Cleaning Certificate';
+       ord.Select_Documentation__c = '3';
+        ord.Documentation__c = 'Sales Invoice, Packing List, Certificate of Origin, Certificate of Analysis with Batch No. of the product loading photos of container (at least 4 photos)';
+        ord.Select_Documentation__c = '4';
+        ord.Documentation__c = 'Sales Invoice, Packing List, Certificate of Origin, Certificate of Analysis with Batch No. of the product loading photos of isotank (at least 4 photos)';
+         ord.Select_Documentation__c = '5';
+        ord.Documentation__c = '5welcome';
+        ord.Select_Documentation__c = '6';
+        ord.Documentation__c = 'welcome3';
+        ord.Select_Documentation__c = '1';
+        ord.Documentation__c = 'welcome3';
+        insert ord;
+        ordList.add(ord);
+        SelectDocumentationPicklist.selectPicklistDocumentation(ordList);
+         
+        update ord;
+        ordList.add(ord);
+        SelectDocumentationPicklist.selectPicklistDocumentation(ordList);
+        // SelectDocumentationPicklist.specialConditions(ordList);
+        
+    }
+    @isTest
+    public static void selectSpecialCondition(){
+        List<Order__c> ordListt = new List<Order__c>();
+        Order__c orrd = new Order__c();
+        orrd.Status__c = 'Draft';
+        orrd.Email__c = 'kosekalyani@gmail.com';
+        orrd.Select_Special_Condition__c = '1';
+        orrd.Special_Conditions__c = '1';
+       orrd.Special_Conditions__c = 'abcdef';
+        insert orrd;
+        ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+        orrd.Select_Special_Condition__c = '2';
+      
+         update orrd;
+        ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+        orrd.Select_Special_Condition__c = '3';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+        orrd.Select_Special_Condition__c = '4';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+            orrd.Select_Special_Condition__c = '5';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+            orrd.Select_Special_Condition__c = '6';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+            orrd.Select_Special_Condition__c = '7';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+            orrd.Select_Special_Condition__c = '8';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+            orrd.Select_Special_Condition__c = '9';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+            orrd.Select_Special_Condition__c = '10';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+            orrd.Select_Special_Condition__c = '11';
+         update orrd;
+         ordListt.add(orrd);
+        SelectDocumentationPicklist.specialConditions(ordListt);
+    }
+  
+   
+        @isTest
+    public static void bankDetailsForPayment(){
+        
+        List<Order__c> ordListtb = new List<Order__c>();
+        Order__c orrd1 = new Order__c();
+        orrd1.Status__c = 'Draft';
+        orrd1.Email__c = 'kosekalyani@gmail.com';
+        orrd1.Bank_Type__c = 'Eurofactor (EURO)';
+      //  orrd1.Special_Conditions__c = 'Eurofactor (EURO)';
+       orrd1.Bank_Details_for_payment__c = 'Bank Name : Deutsche Bank AG  Address : Avenue Marnix 13-15, 1000 Brussels  Account No. : 826-1000944-18   IBAN : BE50 82610009 4418   BIC : DEUTBEBE';
+        insert orrd1;
+        ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+        orrd1.Bank_Type__c = 'Eurofactor (USD)';
+      
+         update orrd1;
+        ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+        orrd1.Bank_Type__c = 'KBC Bank (Euro)';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+        orrd1.Bank_Type__c = 'KBC Bank (USD)';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+            orrd1.Select_Special_Condition__c = '5';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+            orrd1.Select_Special_Condition__c = '6';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+            orrd1.Select_Special_Condition__c = '7';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+            orrd1.Select_Special_Condition__c = '8';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+            orrd1.Select_Special_Condition__c = '9';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+            orrd1.Select_Special_Condition__c = '10';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb);
+            orrd1.Select_Special_Condition__c = '11';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb); 
+         update orrd1;
+         ordListtb.add(orrd1);
+     /*   SelectDocumentationPicklist.bankDetailsForPayment(ordListtb); 
+        orrd1.Payment_terms_Purchase_Order_to_Supplier__c = '(Numbers) days from invoice date';
+       orrd1.Payment_terms_for_Purchase_Order__c = 'days from invoice date' ;
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb); 
+         orrd1.Payment_terms_for_Sales_invoice_Proform__c ='Value Adv Payment and Value bal after Number days from BL date';
+       orrd1.Payment_terms_for_Purchase_Order__c = 'days from invoice date' ;
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb); 
+         orrd1.Payment_terms_for_Sales_invoice_Proform__c = '(Value) Advance, Balance (Value) after (Number) days of Delivery';
+       orrd1.Payment_Terms_with_Customer__c ='Value_1__c  Advance objAcc.Value_2__c Balance objAcc.Days__cdays of Delivery';
+         update orrd1;
+         ordListtb.add(orrd1);
+        SelectDocumentationPicklist.bankDetailsForPayment(ordListtb); */
+    }
+      
+    
+}

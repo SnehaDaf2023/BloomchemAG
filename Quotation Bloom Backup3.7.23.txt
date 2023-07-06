@@ -1,0 +1,223 @@
+<apex:page standardController="Quote__c" standardStylesheets="false" renderAs="pdf" 
+           applyBodyTag="false">    
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> </title>
+    <meta content="" name="description"/>
+    <meta content="" name="keywords"/>
+
+  <!-- Favicons -->
+  <!-- <link href="assets/img/favicon.png" rel="icon"> -->
+
+  <!-- Google Fonts -->
+
+  <!-- Vendor CSS Files -->
+<style type="text/css">
+  table td, table th{ padding: 4px; font-family: arial; font-size: 14px; }
+</style>
+    
+
+</head>
+ 
+<body>
+
+<table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px; margin: auto; font-family: 'Roboto', sans-serif; font-size: 11px;">
+  <tbody>
+    <tr>
+      <td colspan="2" align="right" style="border: 0;padding: 8px;">
+           <div class="header">
+            <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>
+      </div>
+        <!--<img src="https://www.bloomchemag.com/images/bloomchemag-logo.png">-->
+      </td>
+    </tr>
+    <!--tr>
+        <td colspan="2" style="border: 0;font-size: 11px;padding: 8px;"></td>
+    </tr-->
+
+    <tr>
+      
+      <td colspan="2" valign="top" style="border: 0; font-size: 10px;">
+        
+        <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="border: 0;font-size: 11px;">
+          <tbody>
+            <tr>
+              <td valign="top" style="border: 0;padding: 4px;">
+                <table  width="100%" border="0px" cellspacing="0" cellpadding="0" valign="top"  style="border: 0;font-size: 11px;">
+                  <tbody>
+                      <tr>
+                        <td colspan="2" style="border: 0; font-size: 11px;padding: 4px 4px 4px 0;"> <strong>Bloomchemag BV</strong><br/><br/> Sint-Antoniusstraat 16 b1, B-2400,<br/> Mol, Belgium <br/> T: +32 14 32 21 36 | F +32 14 42 03 01</td>
+                     <!-- <td style="border: 0; font-size: 11px;padding: 8px;">&nbsp;</td>  -->
+                    </tr> 
+                   <!--  <tr>
+                      <td colspan="2" height="50px;" style="border: 0; font-size: 11px;padding: 8px;">&nbsp;</td>
+                    </tr> -->
+                    <tr>
+                      <td style="font-weight: bold;border: 0; font-size: 11px;padding: 4px 4px 4px 0;">Website: </td>
+                      <td style="border: 0; font-size: 11px;padding: 4px;">www.bloomchemag.com</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: bold;border: 0; font-size: 11px;padding: 4px 4px 4px 0;">Email</td>
+                      <td style="border: 0; font-size: 11px;padding: 4px;">info@bloomchemag.com</td>
+                    </tr>
+                    <!--tr>
+                      <td style="font-weight: bold;border: 0; font-size: 11px;padding: 4px 4px 4px 0;">Phone</td>
+                      <td style="border: 0; font-size: 11px;padding: 4px;">+00 32 14 322136</td>
+                    </tr>-->
+
+
+                  </tbody>
+                </table>                
+
+              </td>
+              <td valign="top" style="border: 0;font-size: 10px; padding: 8px; ">
+                <table  width="100%" border="0px" cellspacing="0" cellpadding="0" valign="top" style="border: 0;font-size: 11px; ">
+                  <tbody>
+                    <tr>
+                        <td style="font-weight: bold; border: 0; font-size: 11px;padding:2px 3px; width: 150px;">Date:</td>
+                     <!-- <td style="font-weight: bold;">Date</td>
+                      <td>&nbsp;</td>-->
+                      <td style="border: 0; font-size: 11px;padding: 2px 3px;"><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Quote__c.CreatedDate}"/> </apex:outputText>&nbsp;</td>
+                    </tr>
+                   <!--- <tr>
+                      <td style="font-weight: bold; border: 0; font-size: 11px;padding: 2px 3px; width: 150px;">For the attention of:</td>
+                      <td style="border: 0; font-size: 11px;padding: 2px 3px;">For the attention of: &nbsp;</td>
+                    </tr> -->
+                    <tr>
+                      <td style="font-weight: bold; border: 0; font-size: 11px;padding: 2px 3px; width: 150px;">Customer Name: </td>
+                      <td style=" border: 0; font-size: 11px;padding: 2px 3px;"> {!Quote__c.Customer__r.Name}</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: bold; border: 0; font-size: 11px;padding: 2px 3px; width: 150px;">Customer ID:</td>
+                      <td style=" border: 0; font-size: 11px;padding: 2px 3px ;">  {!Quote__c.Customer__r.Customer_ID__c}</td>
+                    </tr>
+                    <tr>
+                      <td valign="top" style="font-weight: bold; border: 0; font-size: 11px;padding: 2px 3px; width: 150px;">Customer Email:</td>
+                      <td valign="top" style=" border: 0; font-size: 11px;padding: 2px 3px;"> {!Quote__c.Customer__r.Email__c}</td>
+                    </tr>
+                      
+
+                  </tbody>
+                </table>                
+
+              </td>
+              <td valign="top"  style="border: 0;font-size: 10px;padding:0 8px;">
+                <table  width="100%" border="0px" cellspacing="0" cellpadding="0" valign="top" style="border: 0;font-size: 11px;padding:0 8px;">
+                  <tbody>
+                    <tr>
+                        <td colspan="2" valign="top" style="font-weight: bold; border: 0;font-size: 11px;padding:0 8px; width: 200px;">Delivery Address: </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-weight: none; border: 0;"> &nbsp; {!Quote__c.Customer__r.Address__c}<br/>&nbsp;  {!Quote__c.Customer__r.Country__c}</td>
+                    </tr>
+                  </tbody>
+                </table>   
+             </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </td>
+
+    </tr>
+
+
+    <!--tr>
+      <td colspan="2" style="font-weight: bold; border: 0;font-size: 11px;padding: 8px;"> <a href="#"> https://www.bloomchemag.com/ </a></td>
+    </tr-->
+    <tr>
+       <td colspan="2" style="font-weight: bold; font-size: 20px;font-size: 11px; padding: 8px;text-align: center; border:0; font-family: 'Roboto', sans-serif;">QUOTATION</td>
+    </tr>
+      
+    <tr>
+      <td colspan="2" style="border: 0;font-size: 10px;">
+        <table  width="100%" cellpadding="0" cellspacing="0" style="width: 100%; font-size: 11px;padding: 8px; font-family: 'Roboto', sans-serif;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center;  padding:4px;">Our Item Code</th>
+              <th style="border: 1px solid #000;font-size: 11px; padding: 4px; text-align: center;  border-left: 0;">Item Description </th>
+              <th style="border: 1px solid #000;font-size: 11px; padding: 4px; text-align: center;  border-left: 0;">Pack/Bulk </th>
+              <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center;  border-left: 0;">Packaging Description   </th>
+              <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center; border-left: 0;">Pack Net Weight (MT/Kg)  </th>
+              <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center; border-left: 0;">No. of Packs </th>
+              <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center;  border-left: 0;">Volume in Pricing Unit  </th>
+              <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center; border-left: 0;">Price Per Pricing Unit </th>
+                <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center;  border-left: 0;">Currency </th>
+                <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center; border-left: 0;">Pricing Unit  </th>
+              <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center; border-left: 0;">Valid To  </th>
+                <th style="border: 1px solid #000; font-size: 11px; padding: 4px; text-align: center; border-left: 0;">Incoterm </th>
+
+            </tr>
+          </thead>
+             <tbody>
+            <apex:variable value="{!1}" var="count" />
+                                                
+                                             <apex:repeat var="b" value="{!Quote__c.Order_Products__r}">
+                                                <tr>
+                                                <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-left:1px solid #000;border-right:1px solid #000; border-bottom:1px solid #000; padding:4px;"><apex:Outputtext value="{!b.Products__r.Product_Code__c}"/><br/>CAS NO: <apex:Outputtext value="{!b.Products__r.CAS_NO__c}"/> </td>
+                                                <td  style="font-weight: light; padding:4px;font-size: 11px; border: none; border-right:1px solid #000;border-bottom:1px solid #000; "><apex:Outputtext value="{!b.Products__r.name}"/></td>
+                                                <td  style="font-weight: light; padding:4px;font-size: 11px; border: none; border-right:1px solid #000;border-bottom:1px solid #000; "><apex:Outputtext value="{!b.Bulk_Pack__c}"/></td>
+                                                <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.Packaging_Description__c}"/></td>     
+                                                <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.Products__r.Pack_Net_Weight_MT_Kg__c}"/></td> 
+                                                <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.No_of_Packs__c}"/></td> 
+                                                <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.Volume_in_Pricing_Unit__c}"/></td>
+                                                <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.Price_Quoted_MT__c}"/></td>
+                                                        <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.Products__r.Currency__c}"/></td>
+                                                        <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.Products__r.Pricing_Unit__c}"/></td>
+                                                <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!b.Products__r.Valid_From__c}"></apex:param> </apex:outputText> </td>
+                                                            <td colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:Outputtext value="{!b.Incoterm__c}"/></td>
+                                               <!-- <td  colspan="1"  style="font-weight: light; font-size: 11px;border: none;border-right:1px solid #000; padding:4px;border-bottom:1px solid #000;"><apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!b.Products__r.Valid_To__c}"></apex:param> </apex:outputText> </td>  -->
+                                               
+                                                 </tr>                               
+                     
+
+            </apex:repeat>
+            </tbody>
+         
+        </table>  
+          
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style=" border: 0;  height: 50px;"> &nbsp;</td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="font-family: 'Roboto', sans-serif;border: 0;font-size: 11px;padding: 8px;"> <strong>Additional Comments:</strong>{!Quote__c.Additional_Comments__c}</td>
+    </tr>
+
+    <tr>
+      <td style="padding:0px;border: 0">
+        <table  width="100%" border="0px" cellspacing="0" cellpadding="0" valign="top" style="font-family: 'Roboto', sans-serif;border: 0;font-size: 11px;padding:0px;"> 
+          <tbody>
+            <tr>
+              <td style="font-family: 'Roboto', sans-serif;border: 0;font-size: 11px;padding:4px 8px;"><strong> Terms and Conditions:</strong> Our offers are strictly subject to final confirmation.</td> 
+            </tr>
+            <tr>
+            <td style="font-family: 'Roboto', sans-serif;border: 0;font-size: 11px;padding:4px 8px;"><strong> Payment Terms: </strong>{!Quote__c.Payment_Terms_Days__c} days against invoice</td>
+            </tr>
+           <!--- <tr>
+              <td style="font-family: 'Roboto', sans-serif;border: 0;font-size: 11px;padding:4px 8px;"><strong> Reach: </strong> Fully EU-REACH registered product</td>
+            </tr> -->
+
+
+          </tbody>
+        </table>                
+
+
+      </td>
+              
+    </tr>
+            
+
+  </tbody>
+</table>
+    
+</body>
+</html>
+    
+</apex:page>

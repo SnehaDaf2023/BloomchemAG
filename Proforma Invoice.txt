@@ -1,0 +1,726 @@
+<apex:page standardController="Documentation__c" standardStylesheets="false" renderAs="pdf" 
+           applyBodyTag="false">
+    
+    <html lang="en"> 
+        <head>
+            <meta charset="UTF-8"/>
+            <title>DotNetTec - Invoice html template bootstrap</title>
+            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css'/>
+            <link href='https://fonts.googleapis.com/css?family=Roboto | 400,500' rel='stylesheet' type='text/css' />
+            
+        </head>
+        
+        <style type="text/css" media= "print">
+            
+            table, td ,th { border:0px; }
+            
+            
+            @media print {
+            tfoot {display: table-footer-group;}
+            
+            }
+        </style>
+        
+        <body style="position: relative;">
+            
+            
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-wth: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:none;     "  >
+                
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="border:none;" >
+                            
+                            <table width="100%" border="0px" cellspacing="0" cellpadding="0" class="border-none" style="border:none;" >
+                                <tbody>
+                                    <tr>
+                                        <td class="border-none" style="padding:2px 8px;border:none;" >
+                                            <div class="header">
+                                                
+                                          
+                                           <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/> 
+                                            </div>
+                                            
+                                            
+                                        </td>
+                                    </tr>
+                                    <!---  <tr>
+<td colspan="0"   style="height: 30px;">&nbsp;</td>
+</tr>-->
+                                    <tr>
+                                        <td colspan="2" class="border-none"  style=" border:none; font-weight: bold; font-size: 14px; color: #000; text-align: center;"> Proforma Invoice </td>
+                                    </tr>
+                                    <!---   <tr>
+<td colspan="2"   style="height: 10px;">&nbsp;</td>
+</tr>-->
+                                    
+                                    <tr>
+                                        <td style="border:0;">
+                                            <table cellspacing="0" cellpadding="0" width="100%" border="0" valign="top" style="border: 1px solid #000;  page-break-after: always;  ">
+                                                <tbody>
+                                                    
+                                                    <tr>
+                                                        <td valign="top" colspan="2" style=" padding: 2px 8px;border:0; border-right: 1px solid #000; border-bottom: 0px solid #000; font-size: 11px; margin-bottom: 0px; vertical-align: top;">
+                                                            
+                                                            Verkoper / Seller  <br/> 
+                                                            <strong style="font-size: 11px;"> {!Documentation__c.Order__r.Address_Country_wise__c} </strong>
+                                                          <!----    Bloomchemag  BVBV <br/>
+                                                            Sint-Antoniusstraat 16 b1 <br/>
+                                                            B-2400, Mol <br/>
+                                                            België / Belgium<br/>
+                                                            BTW/VAT: BE 0544.589.474 -->
+                                                            
+                                                        </td>
+                                                        <td colspan="5" valign="top" style="border:0; padding: 4px;  border-bottom: 0px solid #000;">
+                                                            <table cellspacing="0" cellpadding="0" width="100%" border="0" valign="top" style="border:0; ">
+                                                                <tr>
+                                                                    <td colspan="2" style="border:0; font-size: 11px;">Factuur nr. / Invoice N°: </td>
+                                                                    <td colspan="3" style="border:0; font-size: 11px;">{!Documentation__c.Order__r.Factuur_nr_Invoice_N__c}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2" style="border:0; font-size: 11px;">Datum / Date: </td>
+                                                                    <td  colspan="3" style="border:0; font-size: 11px;"><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Documentation__c.CreatedDate}"/> </apex:outputText></td>  
+                                                                </tr>
+                                                                <!-- <tr>
+<td colspan="2" style=" font-size: 11px;">Product Code </td>
+<td colspan="3" style=" font-size: 11px; font-weight: light;">PMA0018</td>
+</tr>-->
+                                                                <tr>
+                                                                    <td colspan="2" style="border:0; font-size: 11px;">Buyer Order No:</td>
+                                                                    <td colspan="3" style="border:0; font-size: 11px;font-weight: light;">{!Documentation__c.Order__r.Buyer_Order_No__c}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2" style="border:0; font-size: 11px;">Order date:  </td>
+                                                                    <td colspan="3" style="border:0; font-size: 11px;"><apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Documentation__c.Order__r.Order_date__c}"></apex:param> </apex:outputText> </td> 
+                                                                </tr>
+                                                                
+                                                                
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td colspan="2" style="border:0; padding:4px 8px; border-right: 1px solid #000; border-bottom: 1px solid #000;border-top: 1px solid #000; font-size: 11px;">
+                                                            
+                                                            Consignee: 
+                                                            <p style=" border:0;font-size: 11px; margin-bottom: 0px;">
+                                                                <br/> 
+                                                                <strong style="border:0;font-size: 10px;">{!Documentation__c.Order__r.Consignee__c}</strong> </p>
+                                                            <!--- Country : {!Documentation__c.Order__r.Customer_Country__c}<br/>-->
+                                                            
+                                                        </td>
+                                                        
+                                                        <td colspan="5" valign="top" style="border:0;padding: 0 0 0 4px;border:0; border-bottom: 1px solid #000; border-top: 1px solid #000;">
+                                                            <table cellspacing="0" cellpadding="0" width="100%" border="0" valign="top" style=" border:0;">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td colspan="1" style="border:0; font-size: 11px; padding-top: 4px;  border-right: 1px solid #000; width: 120px;"> Name   </td>
+                                                                        <td colspan="4" style="border:0; font-size: 11px;padding-top: 4px;padding-left: 8px;">
+                                                                            <!---   <strong>{!Documentation__c.Customer__r.Name}</strong> --> {!Documentation__c.Order__r.Customer_Name__c}  
+                                                                            <a href="#" style="color: #000; padding-left: 15px;"> {!Documentation__c.Order__r.Customer_Email__c} </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="1" style="border:0; font-size: 11px;  border-right: 1px solid #000; width: 120px;">Customer No.  </td>
+                                                                        <td colspan="4" style="border:0; font-size: 11px;padding:0 0 4px 0px; border-bottom: 1px solid #000;"> 
+                                                                            &nbsp; ID : {!Documentation__c.Order__r.Customer_Id_New__c}
+                                                                            <!---Id :6467568 -->
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="1" style="border:0; font-size: 11px;  border-right: 1px solid #000; width: 120px;">Company Name :  </td>
+                                                                        <td colspan="4" style="border:0; font-size: 11px;padding:4px 0 0 8px;"><strong>{!Documentation__c.Order__r.Company_Name__c} 
+                                                                            <!---QUIMIDROGA S.A. (Q-11)Company_Name__c --> </strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="1" style="border:0; font-size: 11px;  border-right: 1px solid #000; width: 120px;">
+                                                                            Address: <!---Aankoper / Buyer--></td>
+                                                                        <td colspan="4" style="border:0; font-size: 11px;padding-left: 8px;padding-right: 4px;">Country : {!Documentation__c.Order__r.Customer_Country__c}<br/>{!Documentation__c.Order__r.Aankoper_Buyer__c}
+                                                                            <!---MUELLE DE INFLAMABLES - <br/> DELTA 1, PORT DE LAGOS, 2 - 8 <br/> 08039 BARCELONA, Spain-->
+                                                                            <!--- QUIMIDROGA S.A. (Q-11) MUELLE DE INFLAMABLES - DELTA 1, PORT DE LAGOS, 2 - 8 08039 BARCELONA, Spain ESA08002073-->
+                                                                            
+                                                                            
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="1" style="border:0; font-size: 11px;padding-bottom: 4px;  border-right: 1px solid #000;">VAT No.   </td>
+                                                                        <td colspan="4" style="border:0; font-size: 11px;padding-bottom: 4px;padding-left: 8px;">{!Documentation__c.Order__r.VAT_No__c}
+                                                                            <!---ESA08002073-->
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td style="border:0; font-size: 11px; padding: 4px 3px; border-right: 1px solid #000; min-width:104px;" >LOADING PORT <br/> <strong>{!Documentation__c.Order__r.Port_of_Loading_POL__c} </strong></td>
+                                                        <td style="border:0; font-size: 10px; padding: 4px 3px; border-right: 1px solid #000;">DESTINATION: <br/> <strong>{!Documentation__c.Order__r.Port_of_Destination_POD__c} </strong></td>
+                                                        <td style="border:0; font-size: 11px;  padding:4px 3px ;border-right: 1px solid #000;width: 118.5px;  ">Delivery Date : <br/> <strong><apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Documentation__c.Order__r.Loading_Date__c}"></apex:param> </apex:outputText></strong> </td>
+                                                        <td colspan="4" style="border:0;">
+                                                            <table cellspacing="0" cellpadding="0" width="100%" border="0" valign="top" style="width: 100%; border:0;">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td colspan="1" style=" border:0;font-size: 11px; padding: 4px; border-bottom: 1px solid #000; ">Payment Terms :</td>
+                                                                        <td colspan="3" style=" border:0;font-size: 11px; padding: 4px; border-bottom: 1px solid #000; "><strong>{!Documentation__c.Order__r.Payment_Terms_with_Customer__c}</strong> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="1" style="border:0; font-size: 11px; padding: 4px; "><strong>Due Date: </strong></td>
+                                                                        <td colspan="3" style="border:0; font-size: 11px; padding: 4px; "><strong><apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Documentation__c.Order__r.Due_Date__c}"></apex:param> </apex:outputText></strong></td>
+                                                                    </tr>
+                                                                    
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td colspan="7" style="border:0;border-top: 1px solid #000;">
+                                                            <table cellspacing="0" cellpadding="0" width="100%" border="0" valign="top" style="width: 100%; border:0; border-collapse:collapse;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th valign="top" style="border:0; font-size: 11px; padding: 4px; font-weight: normal; border-bottom: 1px solid #000; ">Item Code </th>
+                                                                        <th colspan="2" valign="top" style="border:0; font-size: 11px; padding: 4px; font-weight: normal; border-bottom: 1px solid #000; border-right: 1px solid #000; ">Product</th>
+                                                                        <!-- <th valign="top" style=" font-size: 11px; padding: 4px; font-weight: normal;  "> &nbsp;</th> -->
+                                                                        <th valign="top" style="border:0; font-size: 11px; padding: 4px; font-weight: normal; text-align: center; border-bottom: 1px solid #000; width: 115px; border-right: 1px solid #000;">Hoeveelheid <br/><br/> Quantity</th>
+                                                                        <th valign="top" style="border:0; font-size: 11px; padding: 4px; font-weight: normal; text-align: center;border-bottom: 1px solid #000;width: 115px; border-right: 1px solid #000; "> <br/><br/> Unit  </th>
+                                                                        <th valign="top" style="border:0; font-size: 11px; padding: 4px; font-weight: normal; text-align: center; border-bottom: 1px solid #000;width: 115px; border-right: 1px solid #000;">Eenheidsprijs/<br/> Unit Price  <br/> {!Documentation__c.Order__r.Currency_Invoice__c}</th>
+                                                                        <th valign="top" style="border:0; font-size: 11px; padding: 4px; font-weight: normal; text-align: center; border-bottom: 1px solid #000;width: 115px; ">Totaal bedrag/ <br/>Total Amount <br/> </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <apex:variable value="{!1}" var="count" />
+                                                                <tbody>
+                                                                    <apex:repeat var="b" value="{!Documentation__c.Order_Products__r}">
+                                                                        
+                                                                        
+                                                                        <tr>
+                                                                            
+                                                                            <td class="bx-none bl-none" colspan="3"  style="  font-size: 11px;border: none;border-bottom:0px solid #000;border-right:1px solid #000; padding:4px 8px;">Product Name :<apex:Outputtext value="{!b.Products__r.name}"/><br/><apex:Outputtext value="{!b.Products__r.BULK_Type_of_Tanks__c}"/><br/>CAS No : <apex:Outputtext value="{!b.Products__r.CAS_NO__c}"/><br/>UN No: <apex:Outputtext value="{!b.Products__r.UN_No__c}"/><br/> : <apex:Outputtext value="{!b.Products__r.Packaging_Type__c}"/> <br/>HS No: <apex:Outputtext value="{!b.Products__r.HS_Code__c}"/> <br/> <apex:Outputtext value="{!b.Products__r.Product_Description__c}"/> </td>
+                                                                            <td class="bx-none" style="font-weight: light;padding:4px 8px;font-size: 10px; border: none; border-right:1px solid #001; "><apex:Outputtext value="{!b.Quantity__c}"/></td>
+                                                                            <td class="bx-none" style=" padding:8px;border: 0px solid #000;font-size: 11px; border-right:1px solid #000; "> <apex:Outputtext value="{!b.Unit__c}"/> </td>
+                                                                            <td class="bx-none" style="padding:4px 8px; border:none;  border-bottom: none;font-size: 11px; border-top: none; border-right:1px solid #000;"> <apex:Outputtext value="{!b.Price__c}"  /> </td>
+                                                                            <td class="bx-none br-none" style="padding:4px 8px; border: none; font-size: 11px;border-top: none; border-right: none; "><apex:Outputtext value="{!b.Price_Quoted_MT__c}" /></td>
+                                                                        </tr>
+                                                                        
+                                                                    </apex:repeat>
+                                                                    
+                                                                    
+                                                                </tbody>
+                                                                
+                                                                <tbody valign="top" >
+                                                                    <!-- <tr>
+<td colspan="3" style=" font-size: 11px;border: 0; padding: 4px;border: 0; border-right: 1px solid #000;">
+Methoxy Propyl Acetate (PMA) <br/>
+01 ISO Tank <br/>
+CAS no. : 108-65-6 <br/>
+UN No. 3272 <br/>
+Tank NO:- RLTU2625990 <br/>
+HS Code: 2915.3900
+
+</td>
+<td style="padding: 4px;font-size: 11px;border: 0;border-right: 1px solid #000;text-align: center; "> 23.000</td>
+<td style="padding: 4px;font-size: 11px;border: 0;border-right: 1px solid #000;text-align: center; ">MT</td>
+<td style="padding: 4px;font-size: 11px;border: 0;border-right: 1px solid #000;text-align: center; ">2250.00</td>
+<td style="padding: 4px;font-size: 11px;border: 0;text-align: center; ">51750.00</td>
+</tr>
+
+
+<tr>
+<td colspan="3" style=" font-size: 11px;border: 0; padding: 4px;border: 0; border-right: 1px solid #000;">
+Methoxy Propyl Acetate (PMA) <br/>
+01 ISO Tank <br/>
+CAS no. : 108-65-6 <br/>
+UN No. 3272 <br/>
+Tank NO:- RLTU2625990 <br/>
+HS Code: 2915.3900
+
+</td>
+<td style="padding: 4px;font-size: 11px;border: 0;border-right: 1px solid #000;text-align: center; "> 23.000</td>
+<td style="padding: 4px;font-size: 11px;border: 0;border-right: 1px solid #000;text-align: center; ">MT</td>
+<td style="padding: 4px;font-size: 11px;border: 0;border-right: 1px solid #000;text-align: center; ">2250.00</td>
+<td style="padding: 4px;font-size: 11px;border: 0;text-align: center; ">51750.00</td>
+</tr> -->
+                                                                    
+                                                                    <tr>
+                                                                        <td colspan="3" style="border:0;padding: 4px;font-size: 11px; border-top: 0px solid #000;border-right: 0px solid #000; "> </td>
+                                                                        <!-- sneha  <td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; "> &nbsp;</td>
+<td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; "> &nbsp;</td>
+<td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; "> &nbsp;</td>
+<td style="border:0;padding: 4px;font-size: 11px;text-align: center; "> &nbsp;</td> sneha -->
+                                                                        <td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: left; border-top: 1px solid #000;border-left: 1px solid #000;"> 
+                                                                            Totaal/Total excl. BTW/VAT <br/><br/>
+                                                                            BTW/VAT <br/><br/>
+                                                                            Totaal/Total Incl. BTW/VAT
+                                                                        </td>
+                                                                        <td  style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; border-top: 1px solid #000;"> &nbsp;<br/> 
+                                                                            {!Documentation__c.Order__r.Rate__c}% <br/><br/>  
+                                                                        </td>
+                                                                        <td  style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; border-top: 1px solid #000;"> <br/><br/>
+                                                                            {!Documentation__c.Order__r.Currency_Invoice__c}  <br/><br/>
+                                                                            <!--- {!Documentation__c.Order__r.Select_Country__c}  <br/>-->
+                                                                        </td>
+                                                                        <td style="border:0;padding: 4px;font-size: 11px;text-align: center; border-top: 1px solid #000;"> 
+                                                                            
+                                                                            {!Documentation__c.Order__r.Total_Price__c}  <br/><br/>
+                                                                            {!Documentation__c.Order__r.BTW_VAT_GST__c}  <br/><br/>
+                                                                            {!Documentation__c.Order__r.Totaal_Total_Incl_BTW_VAT_GST__c}   
+                                                                        </td>
+                                                                    </tr>
+                                                                   
+                                                                   
+                                                                </tbody>
+                                                                
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td colspan="7">
+                                                        <table   width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px;border-collapse:collapse;   " >
+                                                        <tbody>
+                                                            <tr > 
+                                                                
+                                                                <!-- sneha <td class="border-none" style="width: 100%;" align="center">This invoice has been assigned to Eurofactor Benelux, Rue du Trone 60, B - 1050 Brussels Tel: +32 2 643 63 63 / Fax +32 2 643 63 64, to whom payment must be made in the currency of the invoice and whose receipt constitues valid discharge. Bank transfers to: Deutsche Bank SA in Brussels:IBAN code N° BE50 8261 0009 4418- Swift code: DEUT BE BE Disputes related to the current invoice must be informed immediately to Eurofactor Benelux.</td> -->
+                                                                <td style= "padding: 4px;font-size: 11px;border-top: 1px solid #000;border-bottom: 1px solid #000; border-right: 0px solid #000;   ">* Above Sales by Bloomchemag are exclusively governed by our "General Sales Terms and Conditions", mentioned here and on our website, and/or also available on demand. ur sales conditions will supercede / override any Purchase condition imposed on us. <br/><br/> This invoice has been assigned to Eurofactor Benelux, Rue du Trone 60, B - 1050 Brussels Tel: +32 2 643 63 63 / Fax +32 2 643 63 64, to whom payment must be made in the currency of the invoice and whose receipt constitues valid discharge. Bank transfers to: Deutsche Bank SA in Brussels:IBAN code N° BE50 8261 0009 4418- Swift code: DEUT BE BE Disputes related to the current invoice must be informed immediately to Eurofactor Benelux.
+                                                                    
+                                                                </td>   
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                        </td>
+                                                    </tr>
+                                                   <tr>
+                                                    <td colspan="7">
+                                                       <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="width: 100%;font-family: 'Roboto', sans-serif; margin: 0px auto; border:0px;  " >
+                                                <tbody>
+                                                    <tr>
+                                                        <td  style="padding: 4px;font-size: 11px;border-top: 0px solid #000;  width: 50%;border-left: 0; border-right:1px #000 solid; border-bottom:0px;">
+                                                         Bank Details for payment <br/>
+                                                            {!Documentation__c.Order__r.Bank_Details_for_payment__c}
+                                                            <!---Bank Name : Deutsche Bank AG <br/>
+                                                            Address : Avenue Marnix 13-15, 1000 Brussels <br/>
+                                                            Account No. : {!Documentation__c.Order__r.Account_No__c} <br/>
+                                                            IBAN : BE50 8261 0009 4418 <br/>
+                                                            BIC : DEUTBEBE-->
+                                                        </td>
+                                                        <td valign="middle" style="border:0;padding: 5px;font-size: 11px; border: 0px solid #000; width: 50%; border-left: 0; border-right:0px; border-bottom:0px;  ">
+                                                            
+                                                            
+                                                            <div class="header">
+                                                                
+                                                                <img src="{!$Resource.BloomSign}" width="90%" style="height: 70px;"/>
+                                                                 
+                                                            </div>  
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                                
+                                                <!-- sneha -->  
+                                               
+                                                
+                                                
+                                            </table>
+                                                       </td>
+                                                    </tr>
+                                                    
+                                                    <!-- sneha                  <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px;   " >
+<tbody>
+<tr >
+<!-- sneha <td class="border-none" style="width: 100%;" align="center">This invoice has been assigned to Eurofactor Benelux, Rue du Trone 60, B - 1050 Brussels Tel: +32 2 643 63 63 / Fax +32 2 643 63 64, to whom payment must be made in the currency of the invoice and whose receipt constitues valid discharge. Bank transfers to: Deutsche Bank SA in Brussels:IBAN code N° BE50 8261 0009 4418- Swift code: DEUT BE BE Disputes related to the current invoice must be informed immediately to Eurofactor Benelux.</td> -->
+                                                    
+                                                    
+                                                    
+                                                    <!-- sneha     <td style= "padding: 4px;font-size: 11px;border-top: 1px solid #000;border-center: 1px solid #000;  ">
+This invoice has been assigned to Eurofactor Benelux, Rue du Trone 60, B - 1050 Brussels Tel: +32 2 643 63 63 / Fax +32 2 643 63 64, to whom payment must be made in the currency of the invoice and whose receipt constitues valid discharge. Bank transfers to: Deutsche Bank SA in Brussels:IBAN code N° BE50 8261 0009 4418- Swift code: DEUT BE BE Disputes related to the current invoice must be informed immediately to Eurofactor Benelux. 
+</td> 
+
+<!-- sneha <td colspan="3" style="border:0;padding: 4px;font-size: 11px;border-top: 1px solid #000;border-right: 1px solid #000;  ">This invoice has been assigned to Eurofactor Benelux, Rue du Trone 60, B - 1050 Brussels Tel: +32 2 643 63 63 / Fax +32 2 643 63 64, to whom payment must be made in the currency of the invoice and whose receipt constitues valid discharge. Bank transfers to: Deutsche Bank SA in Brussels:IBAN code N° BE50 8261 0009 4418- Swift code: DEUT BE BE Disputes related to the current invoice must be informed immediately to Eurofactor Benelux.  </td>-->
+                                                    <!--  <td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; "> &nbsp;</td>
+<td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; "> &nbsp;</td>
+<td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; "> &nbsp;</td>
+<td style="border:0;padding: 4px;font-size: 11px;text-align: center; "> &nbsp;</td> -->
+                                                    <!-- sneha  <td style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: left; border-top: 1px solid #000;"> 
+Totaal/Total excl. BTW/VAT <br/><br/>
+BTW/VAT <br/><br/>
+Totaal/Total Incl. BTW/VAT
+</td>
+<td  style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; border-top: 1px solid #000;"> &nbsp;<br/> 
+Rate <br/><br/>  
+</td> 
+<td  style="border:0;padding: 4px;font-size: 11px;border-right: 1px solid #000;text-align: center; border-top: 1px solid #000;"> <br/><br/>
+{!Documentation__c.Order__r.Select_Country__c}  <br/><br/>
+{!Documentation__c.Order__r.Select_Country__c}  <br/>
+</td>
+<td style="border:0;padding: 4px;font-size: 11px;text-align: center; border-top: 1px solid #000;"> 
+
+{!Documentation__c.Order__r.Total_Price__c}  <br/><br/>
+{!Documentation__c.Order__r.BTW_VAT_GST__c}  <br/><br/>
+{!Documentation__c.Order__r.Totaal_Total_Incl_BTW_VAT_GST__c}   
+</td>
+</tr>
+</tbody>
+</table>  
+
+-->
+                                                    
+                                                    <!-- <tr>
+<td style="border:0;padding:0 4px;font-size: 11px; width: 150px; border-top: 1px solid #000; ">&nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px; width: 150px;border-top: 1px solid #000; border-right: 1px solid #000;">&nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px;border-top: 1px solid #000; "> 
+Totaal/Total excl. BTW/VAT 
+</td>
+<td style="border:0;padding:0 4px;font-size: 11px;border-top: 1px solid #000; ">&nbsp; 
+</td>
+<td style="border:0;padding:0 4px;font-size: 11px;border-top: 1px solid #000;border-right: 1px solid #000; ">&nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px; border-top: 1px solid #000;border-right: 1px solid #000; border-bottom: 1px solid #000;">
+{!Documentation__c.Order__r.Select_Country__c}  
+
+</td>
+<td style="border:0;padding:0 4px;font-size: 11px;border-top: 1px solid #000;border-bottom: 1px solid #000; ">
+{!Documentation__c.Order__r.Total_Price__c} 
+</td>
+</tr>
+<tr>
+<td style="border:0;padding:0 4px;font-size: 11px; width: 150px; ">&nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px; width: 150px; border-right: 1px solid #000;">&nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px; "> BTW/VAT</td>
+<td style="border:0;padding:0 4px;font-size: 11px; ">Rate</td>
+<td style="border:0;padding:0 4px;font-size: 11px; border-right: 1px solid #000; "></td>
+<td style="border:0;padding:0 4px;font-size: 11px; border-right: 1px solid #000; border-bottom: 1px solid #000;">{!Documentation__c.Order__r.Select_Country__c}</td>
+<td style="border:0;padding:0 4px;font-size: 11px; border-bottom: 1px solid #000;">{!Documentation__c.Order__r.BTW_VAT_GST__c} &nbsp;</td>
+</tr>
+<tr>
+<td style="border:0;padding:0 4px;font-size: 11px; width: 150px; ">&nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px; width: 150px; border-right: 1px solid #000;">&nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px; "> Totaal/Total Incl. BTW/VAT</td>
+<td style="border:0;padding:0 4px;font-size: 11px; "> &nbsp;</td>
+<td style="border:0;padding:0 4px;font-size: 11px;border-right: 1px solid #000; "> &nbsp;</td>
+
+<td style="border:0;padding:0 4px;font-size: 11px; ">{!Documentation__c.Order__r.Totaal_Total_Incl_BTW_VAT_GST__c}</td>
+</tr> -->
+                                                    
+                                                    <!-- sneha     </tbody>
+</table>
+</td>
+</tr>--> 
+                                                    
+                      <tr>
+                        <td style="position:relative; width:100%;" colspan="7"> 
+                             <div class="footer" style="width: 100%;position:fixed; bottom:0px;">
+                            <!-- sneha 17/11 
+                                <img src="https://bloomchemagpvtltd--sandboxorg--c.sandbox.vf.force.com/resource/1668593653000/newlogo" style="width:100%; "/>
+                            -->
+                                 <img src="https://bloomchemagpvtltd--sandboxorg--c.sandbox.vf.force.com/resource/1668593653000/InvoiceAddressforIndiaBelgiumCommercial" style="width:100%; "/>
+                              </div> 
+                        </td>
+                    </tr>
+                                                    
+                                                </tbody>
+                                                
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    
+                                   
+                                </tbody>
+                                
+                            </table>
+                            
+                        </td>
+                    </tr>
+                   
+                     </tbody>
+                            </table>
+            
+            
+               
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px; page-break-after: always;  "  >
+                
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                               <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>
+                            
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">GENERAL SALES TERMS and CONDITIONS – BLOOMCHEMAG BVBA</h2>
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">Unless otherwise agreed in writing, all the sales by BLOOMCHEMAG are exclusively governed by the following general terms and conditions and these general terms and conditions comprise the basis on which BLOOMCHEMAG sells product. CUSTOMER irrevocably agrees to purchase from BLOOMCHEMAG, the products mentioned on the order confirmation subject to these terms and conditions; and BLOOMCHEMAG upon execution of Order, agrees to sell the Goods to CUSTOMER. CUSTOMER’s terms and conditions of purchase mentioned on CUSTOMER’s order forms or any other of his documents shall not apply and will not be considered as waivers. In case of any inconsistency between the English version of these General sales terms and conditions and a version in any other language, the English version shall prevail. </p>
+                            <h5 style="font-size: 16px; margin: 0; font-weight: bold;padding:0 0 10px 30px; ">Definitions</h5>
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">In General Sales Terms Conditions, Seller and the counter party to any Contract shall be referred to as “BLOOMCHEMAG” and </p>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">“CUSTOMER” respectively; each of these may also be referred to as “Party” and together as “Parties”. “Contract” implies the relevant </p>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">Order Confirmation. “Order” implies the document issued by CUSTOMER to order Products for purchase / procurement from</p>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">BLOOMCHEMAG. “Order Confirmation” implies the PI (Purchase/Performa Invoice) or any document issued by BLOOMCHEMAG to</p>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">CUSTOMER to confirm written acceptance for an Order. “Product(s)” means the product(s) or goods as specified in the relevant Contract. Business Day implies a day when both BLOOMCHEMAG and CUSTOMER are open for general business and, in the event of a payment due on any such day, a day considered will be when the bank(s) of BLOOMCHEMAG are open for general business in the place where a  </p>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">payment is required to be received. “Delivery” implies the moment and place at the Delivery Point when the risk associated to the Product passes from BLOOMCHEMAG to CUSTOMER according to the applicable delivery terms and conditions issued by the BLOOMCHEMAG. </p>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;"> This Order represents the sole and entire agreement and understanding between the parties and supersedes and replaces all previous contracts or understandings, written or oral, with respect to the Unit. No amendment of the terms hereof will be binding unless signed by Customer and by BLOOMCHEMAG. </p>
+                        </td>
+                    </tr>
+                </tbody>
+                
+               
+                
+            </table>
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px; page-break-after: always;  "  >
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                               <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>
+                                  
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">BLOOMCHEMAG reserves the right to refuse to enter into, and to cancel any order, placed under this Contract if BLOOMCHEMAG in its sole discretion determines or judges that the entry into such order, the supply of product(s) or the performance of the transaction to which such order relates would violate any applicable law or regulation of the Belgium or any other government. CUSTOMER agrees that any such refusal or cancellation by BLOOMCHEMAG will not constitute a breach of any obligation under this Contract and hereby waives any and all claim(s) against BLOOMCHEMAG for any loss, expense or cost, including consequential damages, that the CUSTOMER may incur by virtue of such refusal(s) or cancellation(s). The laws of Belgium shall govern this Order and the conditions stipulated herein. All disputes in connection with this Order and the conditions stipulated herein shall be subject to the exclusive jurisdiction of the competent courts of district of Turnhout, Belgium except where BLOOMCHEMAG elects to bring proceedings in jurisdiction of competent courts of National Capital Region of India where parent company BLOOMCHEMAG Pvt Ltd is incorporated, to safeguard any of its rights, including, but not limited to, re-possession of Goods or enforcing title retention or otherwise. The United Nations Convention on the International Sale of Goods or any other jurisdiction will not apply to the Contract. </p>
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">ORDERS</h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">All Orders are accepted on and subject to these General Terms and Conditions of Sale. No changes to an Order issued by CUSTOMER shall be binding on BLOOMCHEMAG unless explicitly approved by BLOOMCHEMAG by issuing a new Order. Orders are deemed to have been accepted by CUSTOMER by delivering the Products. </p>
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">PRICE, PAYMENT and TAXES</h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">The price agreed is the one stipulated in the offer and can only be modified by foregoing written agreement. The price stated on the Order confirmation as per INCOTERMS 2010 and is valid in the currency mentioned in the offer and excludes VAT, taxes, duties, insurance and transport unless clearly offered as such. Any tax (other than on income), duty or other governmental charge now or hereafter imposed on Product (or on BLOOMCHEMAG, or required to be collected or paid by BLOOMCHEMAG, by reason of the transportation, sale or use of such Product) (“Tax”) will be paid by CUSTOMER in addition to the sale price. BLOOMCHEMAG invoices are latest payable in full on the due-date and at the registered office of BLOOMCHEMAG. CUSTOMER shall make payment in accordance with the terms stated on the Order confirmation and may not suspend its payment obligations or set-off or deduct any amount charged by BLOOMCHEMAG for any reason whatsoever. Any delay in payment shall give rise by law and without formal notice, to the payment of 15% interest starting on the due-date of the invoice. Each overdue payment of any invoice on the due date shall immediately give rise to the payment of any and all outstanding invoices.  </p>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+                
+                
+            </table>
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px; page-break-after: always;  "  >
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                               <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/> 
+                              
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">PRODUCT QUANTITY/QUALITY</h2>
+                            
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">Subject to the terms and conditions set forth in these General Sales Terms and Conditions, BLOOMCHEMAG shall deliver to CUSTOMER and CUSTOMER shall take from BLOOMCHEMAG the quantity of Products within the tolerance range as specified in the relevant Contract. CUSTOMER acknowledges that the weight indicated in the Order confirmation shall be conclusive and binding upon measurement made at shipping point. Quantity of Goods shall be deemed conclusive and binding as indicated in the respective Bill of Lading and/or weight bill attached to this Order pursuant to confirmation issued by tank installation or appointed Surveyor at loading point. BLOOMCHEMAG shall make reasonable commercial efforts to inform CUSTOMER in advance on the actual quantity expected to be delivered. In any event CUSTOMER shall pay BLOOMCHEMAG the price for the quantity of Products actually delivered and taken or retained. CUSTOMER shall notify BLOOMCHEMAG in writing of any claim related to delivered quantities as soon as practicable and in any event within two Business Day following Delivery, failing which the quantity shall be deemed accepted and any right to raise any quantity claim waived. In bulk transports a tolerance of 0.2% shall be considered. BLOOMCHEMAG shall not be liable for any special indirect or consequential damages or loss of profit from resale of product. No legal proceeding or demand for arbitration arising under this contract shall be maintainable against BLOOMCHEMAG unless commenced or made within 15 days after passing of title of product or failure to deliver product hereunder. </p>
+                            
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">DELIVERY AND TRANSPORTATION</h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">The mode and method of transport, shipping, packaging, etc., is determined by BLOOMCHEMAG if no further indication is provided by the CUSTOMER. Any specific requirement(s) of the CUSTOMER on the transport / shipment will only be performed if the CUSTOMER has declared and agreed that it will bear the additional costs. The Goods shall be delivered specific to INCOTERMS 2010 terms as stipulated in the Order confirmation. BLOOMCHEMAG shall use reasonable effort(s) to adhere to the Anticipated Delivery Date as stated on the Order confirmation but delivery period as stated in order for delivery and implementation(s) are not binding, and are only target dates. BLOOMCHEMAG shall not be liable for any loss resulting from any delay in delivery; nor shall the CUSTOMER be entitled to cancel the Order due to failure to deliver by the Anticipated Delivery Date or any kind of compensation thereof. The CUSTOMER acknowledges that the Goods may be delivered in partial shipments, each deemed as a separate sale and default of BLOOMCHEMAG in respect of any one or more shipments shall not entitle CUSTOMER to repudiate, terminate or rescind the Order in respect of other shipments. Any liability on the part of BLOOMCHEMAG for failure or delay in delivery is hereby excluded. If the time of delivery is met, this will not exempt the CUSTOMER from his/its obligations. </p>
+                            
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">Subject to these terms and conditions, CUSTOMER irrevocably undertake to indemnify BLOOMCHEMAG for any and all expenses  and costs incurred by BLOOMCHEMAG relating to and/or connected with storage of Goods after Expected Date</p>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+              
+                
+            </table>            
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px; page-break-after: always;  "  >
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                             <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>
+                               
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;"> of Delivery and in the event that CUSTOMER did not lift up Goods (or taken Delivery), in whole or in part(s), such obligation to reimburse BLOOMCHEMAG shall not be less than EUR 12 per metric ton. CUSTOMER acknowledges that </p>
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">for DDU and / or DDP deliveries, a 2 hours discharge time is free of charge. Discharge time starts on arrival of truck / container at destination. Following such initial two hours, CUSTOMER shall pay BLOOMCHEMAG a demurrage fee of EUR 60 per hour </p>
+                            
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">TRANSFER OF OWNERSHIP AND RISK</h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">Risk of loss or damage to the Goods shall pass to CUSTOMER upon Delivery INCOTERMS 2010 term stipulated on the Order confirmation; BLOOMCHEMAG will retain the full ownership of the Goods, to the fullest extent, and the title thereto shall remain exclusively with BLOOMCHEMAG, unless and until BLOOMCHEMAG receives all payments due for the Goods and in respect of the Order, including any and all additional payments due in respect of delivery. CUSTOMER shall not remove or obscure any label or marking which may allow the goods to be identified with BLOOMCHEMAG. </p>
+                            
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">Before BLOOMCHEMAG has received full payment of the Price stipulated on the Order confirmation, CUSTOMER shall not sell, lease or otherwise dispose of the Goods, shall take proper care of the Goods and shall keep the Goods free  and clear from any and all liens, pledges, security interests, encumbrances and rights of any third party, except those created by BLOOMCHEMAG. CUSTOMER shall  </p>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+              
+                
+                
+            </table>  
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px; page-break-after: always;  "  >
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                            <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/> 
+                                
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            
+                            
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">give BLOOMCHEMAG immediate notice of any judicial process or encumbrance affecting the Goods and shall indemnify and hold BLOOMCHEMAG harmless against any loss or damage caused thereby, including, without limitation, court costs, reasonable legal fees and expenses. In case of event that the Products are processed or otherwise mixed with any other goods to form a new product, upon manufacture of such new product(s), BLOOMCHEMAG will retain the security and this therein shall be vested on the basis of the value of the Products over the value of such new product or article. Until the payment is made, the Products must be separately stored (where possible), identified and must be returned or be available for collection at BLOOMCHEMAG’s discretion. BLOOMCHEMAG also reserves the right to enter customer’s premises to collect the Products. If the goods are resold before the payment is completed, they are replaced by the receivables for the purchase price, which are hereby transferred to BLOOMCHEMAG as security. BLOOMCHEMAG may enter CUSTOMER's premises or seek an order by any court or other competent authority to this effect. BLOOMCHEMAG is allowed to recover the Products supplied without the need to inform CUSTOMER or respect any other kind of formal acceptance. The CUSTOMER may only resell the Products if he has become the legal owner of the Products in accordance with the provisions in this agreement.  </p>
+                            
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">INFORMATION and NONCONFORMITY</h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">BLOOMCHEMAG undertakes that the Product will at the time of delivery meet BLOOMCHEMAG Sales Specifications. All Goods are to be inspected within 24 hours of arrival of the carrier, and prior to unloading the Goods into CUSTOMER premises. The CUSTOMER commits to conduct appropriate testing of delivered product to ensure its quality and quantity immediately after delivery prior to processing or mixing. If CUSTOMER failed to inspect the product or omit to inform BLOOMCHEMAG of any damage / deviation of the product immediately latest within 24 hrs of receiving the product or upon affirmative result of Inspection, the goods shall be deemed accepted by CUSTOMER and shall have no right to reject the Goods and/or shall have no right of claim of whatever kind or sort. Any other condition or warranty as to the quality of the Product supplied or its fitness for any particular purpose is excluded. BLOOMCHEMAG’s liability shall under no circumstances exceed the invoice price of any delivery of goods for which the claim is made. BLOOMCHEMAG is not liable for indirect damages or loss of profit(s). Under no circumstances shall BLOOMCHEMAG be liable for consequential, indirect or other damages, losses, or expenses, in connection with such defective Goods, shortage or failures in shipment or Delivery or by reason of the use of or inability to use Goods purchased for any purpose. In no case are Goods to be returned without first obtaining BLOOMCHEMAG’s written approval. In the event that following inspection and BLOOMCHEMAG verification BLOOMCHEMAG concluded that the Goods are defective or non-conforming, BLOOMCHEMAG may, at its sole discretion, replace the defective or nonconforming Goods within reasonable time or avail CUSTOMER to purchase replacement Goods, which shall be   </p>
+                            
+                            
+                            
+                        </td>
+                    </tr>
+                </tbody>
+                
+              
+                
+            </table>  
+            
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px; page-break-after: always;  "  >
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                            <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/> 
+                                
+                                
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            
+                            
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">deemed the sole remedy available to the CUSTOMER. It is being understood that in such case, each party undertakes to indemnify the other for any difference in price between the Goods.  </p>
+                            
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">MSDS </h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">BLOOMCHEMAG will provide CUSTOMER Material Safety Data Sheets (MSDSs) upon request of the CUSTOMER. However, any information mentioned from BLOOMCHEMAG is given and accepted at CUSTOMER’s risk. The CUSTOMER should acknowledge that it is familiar with the product(s) and will take such precautions for hazards and properly handling, management and disposal of wastes and residues resulting from the purchase thereof in accordance with applicable laws and regulations. CUSTOMER shall disseminate appropriate safety, health and environment information to person(s) (includes but not limited to CUSTOMER's employees, contractors and customers) as required by law or which CUSTOMER foresees may be exposed to Product.  </p>
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">CONFIDENTIALITY </h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">All elements of this contract are to be kept private and confidential by all parties concerned. CUSTOMER acknowledges that all information  relating to BLOOMCHEMAG, including but not limited to the offers and technical documentation, whether or not marked as </p>
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">“Confidential” or “Proprietary” shall be considered as strictly confidential. The CUSTOMER shall not disclose any such Confidential Information to any third party and shall not use any such Confidential Information for any purpose without consent of BLOOMCHEMAG. In this context, CUSTOMER shall take all necessary steps to avoid the disclosure of those Confidential Information and use the same care and discretion as in protecting its own confidential information. </p>
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">LIMITED WARRANTY AND LIABILITY </h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">BLOOMCHEMAG warrants, subject to Conditions mentioned herein, that (a) the Goods shall conform with the specification stated on the Order confirmation and (b) at the time of Delivery, the Goods shall be adequately contained, packed and labeled and conform to the standards as per Order Confirmation; This warranty applies only if (a) BLOOMCHEMAG has received a written notice from CUSTOMER giving details of the defective or non conformity of the Goods pursuant to Condition 4, (b) BLOOMCHEMAG has been afforded a reasonable opportunity to inspect the Goods in question, (c) in cases of non conformity of quality or quantity of the Goods delivered, CUSTOMER has provided together with its notice all pertinent details and survey report by a reputable and recognized licensed surveyor, and (d) CUSTOMER has provided, at its expense, all assistance and support necessary for BLOOMCHEMAG to fulfill its obligations  </p>
+                            
+                            
+                        </td>
+                    </tr>
+                </tbody>
+               
+                
+            </table>  
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px; page-break-after: always;  "  >
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                                <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>
+                               
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            
+                            
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">Manufacturers give no other warranties, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, title, and non-infringement, and the provisions of or failure to provide support services. To the maximum Under this warranty; Except for the express warranty under above condition BLOOMCHEMAG, its affiliates, suppliers, licensors or extent permitted by applicable law, in no event shall BLOOMCHEMAG, its affiliates, suppliers, licensors or manufacturers be liable, in contract or in tort, for any special, incidental, indirect loss, cost or expense, including, but not limited to loss of business profits, business interruption, loss of information, loss of use, loss of or damage to data or records, damage to goodwill, and all other consequential or incidental damages (other than liability for death or personal injury resulting from BLOOMCHEMAG’s fault) of CUSTOMER and/or its clientele suffered for, incurred by CUSTOMER or CUSTOMER’s clientele arising from the Goods or non-delivery of the Goods or nonconformity of the Goods or otherwise; Notwithstanding anything herein to the contrary, BLOOMCHEMAG’s liability shall not exceed the difference between the value of the respective defective, non-conform or non-delivered Goods at the time of delivery and the price attributed to them on the Order confirmation. </p>
+                            
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">TERMINATION AND SUSPENSION </h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">The rights to hold and use the Products / goods shall automatically terminate without need of any notice in the event that a proceeding for suspension of payments, controlled administration, bankruptcy, insolvency, liquidation, windingup, (or the equivalent under any jurisdiction) is initiated by or against CUSTOMER, or CUSTOMER enters into an arrangement with its creditors for its debts. Upon termination of such rights: (a) all sums owed by CUSTOMER to BLOOMCHEMAG shall become immediately due and payable; (b) BLOOMCHEMAG shall be entitled to retake possession of the Products and/or to resell the Products, and for any such purposes.  </p>
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">INSURANCE </h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">Until title to the Goods has passed to CUSTOMER in accordance with Condition mentioned as per Terms and Conditions, Customer, at its own expense, shall maintain the following a standard “All Risk” property insurance with a reputable insurance company acceptable to BLOOMCHEMAG, covering the Goods and, inter alia, the following risks: floods, earthquake, fire, storm, aircraft etc, for an amount of at least the BLOOMCHEMAG’s list price of the Goods. Such insurance shall name BLOOMCHEMAG as beneficiary in respect of the Goods. The aforesaid insurance shall be primary cover, and in no event shall any insurance of BLOOMCHEMAG be called upon to contribute to any loss relating to or arising out of the Order. The insurance shall be in effect and shall be evidenced by a certificate of insurance with all necessary endorsements as required pursuant to this Condition delivered to BLOOMCHEMAG on or prior to the Anticipated Delivery Date (as defined on the Order confirmation). The insurance shall provide for at least </p>
+                            
+                            
+                        </td>
+                    </tr>
+                </tbody>
+             
+                
+            </table>  
+            
+            <table valign="top"  width="100%" border="0px" cellspacing="0" cellpadding="0" style="max-width: 1000px;font-family: 'Roboto', sans-serif; margin: 0 auto; border:0px;    "  >
+                <tbody>
+                    
+                    <tr>
+                        <td class="border-none" style="padding:8px 0;border:none;" >
+                            <div class="header">
+                                <!--- <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>  bloomFinalLogo-->
+                              <img src="{!$Resource.bloomFinalLogo}" width="50%" style="height: 70px;"/>
+                              
+                            </div>                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="border:0px;">
+                            
+                            
+                            <p style="font-size: 11px; margin: 0; padding:0 0 10px 30px; line-height: 20px;">thirty (45) days' prior written notice to BLOOMCHEMAG in the event of any cancellation, non-renewal or material change in coverage, and upon request by BLOOMCHEMAG, CUSTOMER shall provide a copy of any and all endorsements or other documentation relating to such insurance policies. Should CUSTOMER, at any time until transfer of title, be without sufficient insurance, as determined by BLOOMCHEMAG in accordance with the provisions of this Condition(s), CUSTOMER appoints BLOOMCHEMAG as its agent to obtain such coverage, and undertakes to pay to BLOOMCHEMAG the entire cost of such coverage;</p>
+                            
+                            
+                            <h2 style="font-size: 16px; margin: 0; padding: 30px 0 10px; font-weight: bold;">XII. FORCE MAJEURE: </h2>
+                            
+                            <p style="font-size: 11px; margin: 0;padding:0 0 10px 30px; line-height: 20px;">In event of any arising due to nature of Force Majeure, BLOOMCHEMAG shall not be responsible for any loss or damage suffered or incurred by CUSTOMER arising from BLOOMCHEMAG’s failure to perform or delay in performing any obligation under any Contract if so prevented or delayed by cause(s) beyond its reasonable control including but not limited to acts of God, typhoon, fire, flood, earthquake, riots, pirate attacks, wars, hostilities, governmentalrestrictions, strike for whatever causes, stoppage or delay in transport, lock-out, actions by governments or any agency(ies) thereof, boycott or trade embargoes ("Force Majeure"). BLOOMCHEMAG’s time of performance shall automatically be extended for the duration of the event of Force Majeure. If a Force Majeure event prevents BLOOMCHEMAG from performing its obligations under a Contract for more than two (2) months, both parties shall meet and try in good faith to find a suitable solution. If no such solution is obtained within one (1) month, either party may automatically terminate the applicable Contract upon written notice to the other party. In such a case, CUSTOMER shall pay for all costs incurred by BLOOMCHEMAG in connection with its performance of the applicable Contract prior to termination.  </p>
+                            
+                            
+                            
+                        </td>
+                    </tr>
+                </tbody>
+              
+                
+            </table>  
+            
+        </body>
+        
+    </html>
+</apex:page>
